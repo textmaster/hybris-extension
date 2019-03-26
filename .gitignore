@@ -1,0 +1,80 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+**/*-javadoc.jar
+**/*-sources.jar
+**/hmc/bin/*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.idea
+Icon?
+ehthumbs.db
+Thumbs.db
+.env
+
+# hybris output directoy #
+##########################
+target
+classes
+testclasses
+eclipsebin
+gensrc
+web/webroot/cockpit
+
+beans.xsd
+build.xml
+extensioninfo.xsd
+hmc.xsd
+items.xsd
+platformhome.properties
+ruleset.xml
+*-testclasses.xml
+*-webtestclasses.xml
+**/resources/generated-*-web-spring.xml
+**/resources/*-webtestclasses.xml
+**.lastupdate
+
+#Hybris extension generated files#
+**/web/addonsrc/**
+**/web/commonwebsrc/**
+**/web/webroot*/WEB-INF/**/addons/**
+**/web/webroot*/_ui/addons/**
+**/web/webroot*/WEB-INF/lib/addon-*
+
+# IDE project files
+# IntelliJ
+*.iml
+
+# Ansible #
+##########
+app.retry
