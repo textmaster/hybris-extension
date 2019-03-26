@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+	id="com.textmaster.widgets.projectform">
+	<name>TextMaster Projects Form Widget</name>
+	<description>Allows to create project on TextMaster platform</description>
+	<defaultTitle>New Project</defaultTitle>
+	<version>1.0</version>
+	<view src="projects.zul" />
+	<keywords>
+		<keyword>Textmaster</keyword>
+	</keywords>
+	<controller class="com.textmaster.backoffice.widgets.TextMasterProjectController" />
+	<sockets>
+		<input type="com.textmaster.core.model.TextMasterAccountModel" id="accountSelected" />
+		<input type="java.lang.Object" id="reset" />
+		<output type="java.util.Map" id="init" />
+		<output type="java.lang.String" id="type" />
+	</sockets>
+</widget-definition>

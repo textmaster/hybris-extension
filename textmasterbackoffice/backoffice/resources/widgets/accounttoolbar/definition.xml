@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<widget-definition
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+        id="com.textmaster.widgets.accounttoolbar">
+
+    <name>TextMaster Accounts ToolBar</name>
+    <description></description>
+    <version>1.0</version>
+
+    <view src="accounttoolbar.zul"/>
+
+    <keywords>
+        <keyword>Textmaster</keyword>
+    </keywords>
+
+    <controller class="com.textmaster.backoffice.widgets.TextMasterAccountToolbarController"/>
+
+    <sockets>
+        <input id="accounts" type="com.textmaster.core.model.TextMasterAccountModel" multiplicity="List"/>
+        <input id="selectAccount" type="com.textmaster.core.model.TextMasterAccountModel"/>
+        <output id="createContext" type="com.hybris.cockpitng.actions.create.CreateContext"/>
+        <output id="accountSelectedForExternalComponents" type="com.textmaster.core.model.TextMasterAccountModel"/>
+        <output id="accountSelectedForLocalComponents" type="com.textmaster.core.model.TextMasterAccountModel"/>
+        <output id="reset" type="java.util.Map" />
+    </sockets>
+
+</widget-definition>

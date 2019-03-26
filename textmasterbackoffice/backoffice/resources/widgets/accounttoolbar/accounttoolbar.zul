@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml">
+
+    <widget>
+        <div class="yw-textmaster-header">
+            <h:table class="yw-textmaster-header-layout">
+                <h:tr>
+                    <h:td class="yw-textmaster-logo">
+                        <image id="image"
+                               src="${wr}/images/logo-textmaster.png" style="width:200px"/>
+                    </h:td>
+                    <h:td style="width:115px">
+                        <label value="${labels.title}" vflex="1"/>
+                    </h:td>
+                    <h:td>
+                        <combobox id="comboAccounts" readonly="true" hflex="1"/>
+                    </h:td>
+                    <h:td>
+                        <button id="btCreate" label="${labels.create}"/>
+                    </h:td>
+                </h:tr>
+            </h:table>
+        </div>
+
+    </widget>
+</zk>

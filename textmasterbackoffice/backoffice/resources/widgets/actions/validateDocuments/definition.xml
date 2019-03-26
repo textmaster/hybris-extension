@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<action-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="com.textmaster.backoffice.widgets.actions.validatedocuments"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+    <name>TextMaster Validate Documents</name>
+    <description>Validate Documents</description>
+    <author>CleverAge</author>
+    <version>1.0</version>
+    <actionClassName>com.textmaster.backoffice.widgets.actions.create.ValidateDocumentsAction</actionClassName>
+    
+	<sockets>
+		<output id="project" type="com.textmaster.core.model.TextMasterProjectModel" />
+        <output id="account" type="com.textmaster.core.model.TextMasterAccountModel"/>
+	</sockets>
+	
+	<inputType>java.lang.Object</inputType>
+	<outputType>java.lang.Object</outputType>
+    <iconUri>icons/icon_action_validate.png</iconUri>
+    <iconHoverUri>icons/icon_action_validate_hover.png</iconHoverUri>
+	<iconDisabledUri>icons/icon_action_validate_disabled.png</iconDisabledUri>
+</action-definition>

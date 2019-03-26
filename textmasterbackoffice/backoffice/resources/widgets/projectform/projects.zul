@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:w="http://www.zkoss.org/2005/zk/client"
+        xmlns:zk="http://www.zkoss.org/2005/zk"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+    <style src="${wr}/projectform.css" />
+
+    <panel vflex="true" id="projectPanel" collapsible="false" sclass="tm-panel">
+        <panelchildren>
+            <label id="noAccountSelectedLabel" value="${labels.noaccountselected}" visible="true"/>
+            <tabbox id="projectTabs" mold="accordion" vflex="1" visible="false">
+                <tabs>
+                    <tab label="${labels.projectinformations}" />
+                    <tab label="${labels.projecttemplates}" />
+                    <tab label="${labels.datainformations}" />
+                </tabs>
+                <tabpanels>
+                    <tabpanel style="overflow:auto">
+                        <grid>
+                            <columns>
+                                <column width="70px" />
+                                <column />
+                            </columns>
+                            <rows>
+                                <row>
+                                    <label value="${labels.name}" />
+                                    <textbox id="nameTextBox" />
+                                </row>
+                                <row>
+                                    <label value="${labels.source}" />
+                                    <combobox id="sourceLanguageComboBox" readonly="true">
+                                        <comboitem value="none" label="${labels.nolanguage}" />
+                                    </combobox>
+
+                                </row>
+                                <row>
+                                    <label value="${labels.target}" />
+
+                                    <vlayout>
+                                        <listbox id="targetLanguagesListBox" multiple="true" checkmark="true"  visible="false" />
+                                        <label id="targetLanguagesErrorLabel" value="${labels.nolanguage}" />
+                                    </vlayout>
+                                </row>
+                                <row>
+                                    <cell colspan="2" style="text-align:right">
+                                        <button id="nextButtonTemplates" label="${labels.next}" />
+                                    </cell>
+                                </row>
+                            </rows>
+                        </grid>
+                    </tabpanel>
+                    <tabpanel style="overflow:auto">
+                        <grid id="templatesGrid">
+                            <columns>
+                                <column width="70px" />
+                                <column />
+                            </columns>
+                            <rows>
+                                <!-- Content will be added dynamically -->
+                            </rows>
+                        </grid>
+                    </tabpanel>
+                    <tabpanel style="overflow:auto">
+                        <grid>
+                            <columns>
+                                <column width="70px" />
+                                <column />
+                            </columns>
+                            <rows>
+                                <row style="vertical-align: top">
+                                    <label value="${labels.type}" />
+                                    <tree id="typesTree" multiple="false" sclass="tm-typestree">
+                                        <template name="model">
+                                            <treeitem>
+                                                <treerow>
+                                                    <treecell label="${each.name}" />
+                                                </treerow>
+                                            </treeitem>
+                                        </template>
+                                    </tree>
+                                </row>
+                                <row style="vertical-align: top">
+                                    <label value="${labels.attributes}" />
+                                    <vlayout>
+                                        <listbox id="attributesListBox" multiple="true" checkmark="true"  visible="false" />
+                                        <label id="attributesErrorLabel" value="${labels.noattributefound}" />
+                                    </vlayout>
+                                </row>
+                                <row>
+                                    <cell colspan="2" style="text-align:right">
+                                        <button id="selectItemsButton" label="${labels.validate}" />
+                                    </cell>
+                                </row>
+                            </rows>
+                        </grid>
+                    </tabpanel>
+                </tabpanels>
+            </tabbox>
+        </panelchildren>
+    </panel>
+
+</widget>

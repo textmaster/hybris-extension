@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+	id="com.textmaster.widgets.projectsummary">
+	<name>TextMaster Projects Summary Widget</name>
+	<description>Allows to summary and create project on TextMaster platform</description>
+	<defaultTitle>New Project</defaultTitle>
+	<version>1.0</version>
+	<view src="summary.zul" />
+	<keywords>
+		<keyword>Textmaster</keyword>
+	</keywords>
+	<controller class="com.textmaster.backoffice.widgets.TextMasterSummaryController" />
+	<sockets>
+		<input id="init" type="java.util.Map" />
+		<input id="items" type="de.hybris.platform.core.model.ItemModel" multiplicity="List" />
+		<input id="reset" type="java.util.Map" />
+		<output id="reset" type="java.util.Map" />
+		<output id="account" type="com.textmaster.core.model.TextMasterAccountModel" />
+		<output id="selectPerspective" type="com.hybris.backoffice.navigation.NavigationNode"/>
+	</sockets>
+</widget-definition>

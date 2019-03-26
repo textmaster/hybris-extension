@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<action-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="com.textmaster.backoffice.widgets.actions.create"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+    <name>TextMaster Create</name>
+    <description>Create</description>
+    <author>CleverAge</author>
+    <version>1.0</version>
+    <actionClassName>com.textmaster.backoffice.widgets.actions.create.CreateAction</actionClassName>
+    
+	<sockets>
+		<output id="createContext" type="com.hybris.cockpitng.actions.create.CreateContext" />
+	</sockets>
+	
+	<inputType>java.lang.Object</inputType>
+	<outputType>java.lang.Object</outputType>
+    <iconUri>icons/icon_action_add_default.png</iconUri>
+    <iconHoverUri>icons/icon_action_add_hover.png</iconHoverUri>
+	<iconDisabledUri>icons/icon_action_add_disabled.png</iconDisabledUri>
+</action-definition>

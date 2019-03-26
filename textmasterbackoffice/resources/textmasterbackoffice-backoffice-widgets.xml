@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- ~ [y] hybris Platform ~ ~ Copyright 
+	(c) 2000-2015 hybris AG ~ All rights reserved. ~ ~ This software is the confidential 
+	and proprietary information of hybris ~ ("Confidential Information"). You 
+	shall not disclose such Confidential ~ Information and shall use it only 
+	in accordance with the terms of the ~ license agreement you entered into 
+	with hybris. -->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-extension widgetId="backofficeMainSlot">
+
+        <widget id="textmaster-widget-accounts-loader"
+                widgetDefinitionId="com.textmaster.widgets.loader.accounts"
+                slotId="cockpitWidgetChildrenInvisible" template="false">
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <virtual-sockets/>
+        </widget>
+
+        <!-- Project creation -->
+
+        <widget id="textmaster-widget-creation-tab" widgetDefinitionId="com.hybris.cockpitng.borderlayout"
+                slotId="perspectives"
+                title="Create Project" template="false">
+            <widget id="textmaster-widget-creation-collapsible-center"
+                    widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer" slotId="centerSlot" template="false">
+
+                <widget id="textmaster-widget-creation-document-list" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser"
+                        slotId="bottom" title="Document List" template="false">
+                    <setting key="itemRenderer" type="String">listViewRenderer</setting>
+                    <setting key="sortableListHeader" type="Boolean">true</setting>
+                    <setting key="asyncLoading" type="Boolean">true</setting>
+                    <setting key="pageSize" type="Integer">25</setting>
+                    <setting key="socketDataType_$T" type="String">de.hybris.platform.core.model.ItemModel</setting>
+                    <setting key="maxCharsInCell" type="Integer">70</setting>
+                    <setting key="listTitle" type="String"></setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="__externalLocationPath" type="String">null</setting>
+                    <setting key="actionSlotComponentId" type="String"></setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="colConfigCtxCode" type="String">listview</setting>
+                    <setting key="listSubtitle" type="String"></setting>
+                    <setting key="multiSelect" type="Boolean">true</setting>
+                    <virtual-sockets/>
+                </widget>
+
+                <widget id="textmaster-widget-creation-search" widgetDefinitionId="com.hybris.cockpitng.advancedsearch"
+                        slotId="center" template="false">
+                    <widget id="textmaster-widget-creation-search-engine"
+                            widgetDefinitionId="com.hybris.cockpitng.widgets.common.advancedsearchengine"
+                            slotId="cockpitWidgetChildrenInvisible" template="false">
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <setting key="defaultPageSize" type="Integer">25</setting>
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <setting key="simpleSearchConfigCtxCode" type="String">simple-search
+                    </setting>
+                    <setting key="disableAttributesComparator" type="Boolean">false</setting>
+                    <setting key="disableSimpleSearch" type="Boolean">false</setting>
+                    <setting key="addRowPosition" type="String">Header</setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="disableSubtypesCheckbox" type="Boolean">true</setting>
+                    <setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+                    <setting key="disableSearchModelCache" type="Boolean">false</setting>
+                    <setting key="disableSortOrder" type="Boolean">false</setting>
+                    <setting key="sendResetWhenDisableAutoSearch" type="Boolean">true</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="forceSearchForCode" type="String">*</setting>
+                    <setting key="advancedSearchConfigCtxCode" type="String">advanced-search</setting>
+                    <setting key="disableAutoSearch" type="Boolean">false</setting>
+                    <setting key="disableAdvancedSearchToolbar" type="Boolean">false</setting>
+                    <virtual-sockets/>
+                </widget>
+
+                <setting key="topHeight" type="String">0%</setting>
+                <setting key="allowLockingTopPanel" type="Boolean">false</setting>
+                <setting key="thirdSectionDisabled" type="Boolean">true</setting>
+                <setting key="centerHeight" type="String">25%</setting>
+                <setting key="allowLockingCenterPanel" type="Boolean">false</setting>
+                <setting key="bottomPanelCollapsed" type="Boolean">false</setting>
+                <setting key="centerPanelInitiallyLocked" type="Boolean">false</setting>
+                <setting key="centerCaption" type="String"></setting>
+                <setting key="topPanelInitiallyLocked" type="Boolean">false</setting>
+                <setting key="topCaption" type="String"></setting>
+                <setting key="bottomCaption" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="topPanelCollapsed" type="Boolean">true</setting>
+                <setting key="bottomPanelInitiallyLocked" type="Boolean">false</setting>
+                <setting key="centerPanelCollapsed" type="Boolean">true</setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="allowLockingBottomPanel" type="Boolean">false</setting>
+                <virtual-sockets/>
+            </widget>
+
+            <widget id="textmaster-widget-creation-project-summary" widgetDefinitionId="com.textmaster.widgets.projectsummary"
+                    slotId="rightSlot" title="Project Summary" template="false">
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice
+                </setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+            <widget id="textmaster-widget-creation-toolbar" widgetDefinitionId="com.textmaster.widgets.accounttoolbar"
+                    slotId="headerSlot" template="false">
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+
+            <widget id="textmaster-widget-creation-form" widgetDefinitionId="com.textmaster.widgets.projectform"
+                    slotId="leftSlot" title="Create Project" template="false">
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice
+                </setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+
+            <setting key="perspectiveImageUrl" type="String">/cng/images/create.png</setting>
+            <setting key="westDisabled" type="Boolean">false</setting>
+            <setting key="southBorder" type="String">none</setting>
+            <setting key="northHeight" type="String">75px</setting>
+            <setting key="northBorder" type="String">none</setting>
+            <setting key="northCollapsible" type="Boolean">true</setting>
+            <setting key="westCollapsible" type="Boolean">true</setting>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="southDisabled" type="Boolean">true</setting>
+            <setting key="eastClosed" type="Boolean">false</setting>
+            <setting key="westWidth" type="String">300px</setting>
+            <setting key="autoCloseWest" type="Boolean">false</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="eastBorder" type="String">none</setting>
+            <setting key="southHeight" type="String">50px</setting>
+            <setting key="border" type="String">none</setting>
+            <setting key="northDisabled" type="Boolean">false</setting>
+            <setting key="eastWidth" type="String">25%</setting>
+            <setting key="westClosed" type="Boolean">false</setting>
+            <setting key="eastDisabled" type="Boolean">false</setting>
+            <setting key="eastCollapsible" type="Boolean">false</setting>
+            <setting key="broadcastHorizontalResize" type="Boolean">true</setting>
+            <setting key="centerBorder" type="String">none</setting>
+            <setting key="northClosed" type="Boolean">false</setting>
+            <setting key="westBorder" type="String">none</setting>
+            <setting key="opaqueBG" type="String">true</setting>
+            <setting key="southClosed" type="Boolean">false</setting>
+            <setting key="southCollapsible" type="Boolean">true</setting>
+            <virtual-sockets/>
+        </widget>
+
+        <!-- Dashboard -->
+
+        <widget id="textmaster-widget-dashboard-tab" widgetDefinitionId="com.hybris.cockpitng.borderlayout" slotId="perspectives"
+                title="Dashboard" template="false">
+
+            <widget id="textmaster-widget-dashboard-toolbar" widgetDefinitionId="com.textmaster.widgets.accounttoolbar"
+                    slotId="headerSlot" template="false">
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+
+            <widget id="textmaster-widget-dashboard-layout-center" widgetDefinitionId="com.hybris.cockpitng.borderlayout" slotId="centerSlot" template="false">
+
+                <widget id="textmaster-widget-dashboard-layout-center-content" widgetDefinitionId="com.hybris.cockpitng.collapsiblecontainer" slotId="centerSlot" template="false">
+
+                    <widget id="textmaster-widget-dashboard-projects" widgetDefinitionId="com.textmaster.backoffice.widgets.projects.collectionbrowser"
+                            title="Projects List" slotId="center" template="false">
+                        <widget id="textmaster-widget-dashboard-projects-loader"
+                                widgetDefinitionId="com.textmaster.widgets.loader.projects"
+                                slotId="cockpitWidgetChildrenInvisible" template="false">
+                            <setting key="widgetStyleClass" type="String"></setting>
+                            <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+                            <setting key="widgetStyleAttribute" type="String"></setting>
+                            <virtual-sockets/>
+                        </widget>
+                        <setting key="itemRenderer" type="String">listViewRenderer</setting>
+                        <setting key="sortableListHeader" type="Boolean">true</setting>
+                        <setting key="asyncLoading" type="Boolean">true</setting>
+                        <setting key="pageSize" type="Integer">50</setting>
+                        <setting key="socketDataType_$T" type="String">java.lang.Object</setting>
+                        <setting key="maxCharsInCell" type="Integer">70</setting>
+                        <setting key="listTitle" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <setting key="actionSlotComponentId" type="String">textmaster-projects-listviewactions</setting>
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="colConfigCtxCode" type="String">listview</setting>
+                        <setting key="listSubtitle" type="String"></setting>
+                        <setting key="multiSelect" type="Boolean">false</setting>
+                        <setting key="socketDataType_$T" type="String">com.textmaster.core.model.TextMasterProjectModel</setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <widget id="textmaster-widget-dashboard-documents" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser"
+                            title="Documents List" slotId="bottom" template="false">
+                        <widget id="textmaster-widget-dashboard-documents-loader"
+                                widgetDefinitionId="com.textmaster.widgets.loader.documents"
+                                slotId="cockpitWidgetChildrenInvisible" template="false">
+                            <setting key="widgetStyleClass" type="String"></setting>
+                            <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+                            <setting key="widgetStyleAttribute" type="String"></setting>
+                            <virtual-sockets/>
+                        </widget>
+                        <setting key="itemRenderer" type="String">listViewRenderer</setting>
+                        <setting key="sortableListHeader" type="Boolean">true</setting>
+                        <setting key="asyncLoading" type="Boolean">true</setting>
+                        <setting key="pageSize" type="Integer">50</setting>
+                        <setting key="maxCharsInCell" type="Integer">70</setting>
+                        <setting key="listTitle" type="String"></setting>
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <setting key="actionSlotComponentId" type="String">textmaster-documents-listviewactions</setting>
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <setting key="colConfigCtxCode" type="String">listview</setting>
+                        <setting key="listSubtitle" type="String"></setting>
+                        <setting key="multiSelect" type="Boolean">true</setting>
+                        <virtual-sockets/>
+                    </widget>
+
+                    <setting key="topHeight" type="String">0%</setting>
+                    <setting key="allowLockingTopPanel" type="Boolean">false</setting>
+                    <setting key="thirdSectionDisabled" type="Boolean">true</setting>
+                    <setting key="centerHeight" type="String">50%</setting>
+                    <setting key="allowLockingCenterPanel" type="Boolean">false</setting>
+                    <setting key="bottomPanelCollapsed" type="Boolean">false</setting>
+                    <setting key="centerPanelInitiallyLocked" type="Boolean">false</setting>
+                    <setting key="centerCaption" type="String"></setting>
+                    <setting key="topPanelInitiallyLocked" type="Boolean">false</setting>
+                    <setting key="topCaption" type="String"></setting>
+                    <setting key="bottomCaption" type="String"></setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="topPanelCollapsed" type="Boolean">true</setting>
+                    <setting key="bottomPanelInitiallyLocked" type="Boolean">false</setting>
+                    <setting key="centerPanelCollapsed" type="Boolean">false</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="allowLockingBottomPanel" type="Boolean">false</setting>
+                    <virtual-sockets/>
+
+                </widget>
+
+                <widget id="textmaster-widget-dashboard-document-editor"
+                        widgetDefinitionId="com.hybris.cockpitng.backoffice.defaultEditorArea" slotId="rightSlot" template="false">
+
+                    <widget id="textmaster-widget-dashboard-sendsupportmessage"
+                            widgetDefinitionId="com.textmaster.backoffice.widgets.sendsupportmessage"
+                            slotId="cockpitWidgetChildrenInvisible" template="false">
+                        <setting key="widgetStyleClass" type="String"></setting>
+                        <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+                        <setting key="widgetStyleAttribute" type="String"></setting>
+                        <virtual-sockets/>
+                    </widget>
+                    <setting key="showLinksInNotifications" type="Boolean">true</setting>
+                    <setting key="toolbarDisabled" type="Boolean">false</setting>
+                    <setting key="editorAreaConfigCtx" type="String">editor-area</setting>
+                    <setting key="viewModeBtnVisible" type="Boolean">false</setting>
+                    <setting key="widgetStyleClass" type="String"></setting>
+                    <setting key="enableEmbededTitle" type="Boolean">false</setting>
+                    <setting key="actionSlotComponentId" type="String">editorareaactions</setting>
+                    <setting key="bottomToolbar" type="Boolean">false</setting>
+                    <setting key="widgetStyleAttribute" type="String"></setting>
+                    <setting key="initViewMode" type="String">fluid</setting>
+                    <setting key="accordionMold" type="Boolean">false</setting>
+                    <setting key="fluidViewCode" type="String">fluid</setting>
+                    <virtual-sockets/>
+                </widget>
+
+                <setting key="perspectiveImageUrl" type="String"></setting>
+                <setting key="westDisabled" type="Boolean">true</setting>
+                <setting key="westCollapsible" type="Boolean">false</setting>
+                <setting key="westWidth" type="String">0px</setting>
+                <setting key="westClosed" type="Boolean">true</setting>
+                <setting key="westBorder" type="String">none</setting>
+                <setting key="northHeight" type="String">0px</setting>
+                <setting key="northBorder" type="String">none</setting>
+                <setting key="northCollapsible" type="Boolean">false</setting>
+                <setting key="northDisabled" type="Boolean">true</setting>
+                <setting key="northClosed" type="Boolean">true</setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="southBorder" type="String">none</setting>
+                <setting key="southDisabled" type="Boolean">true</setting>
+                <setting key="southHeight" type="String">0px</setting>
+                <setting key="southClosed" type="Boolean">true</setting>
+                <setting key="southCollapsible" type="Boolean">false</setting>
+                <setting key="eastClosed" type="Boolean">true</setting>
+                <setting key="eastBorder" type="String">none</setting>
+                <setting key="eastWidth" type="String">600px</setting>
+                <setting key="eastDisabled" type="Boolean">false</setting>
+                <setting key="eastCollapsible" type="Boolean">true</setting>
+                <setting key="autoCloseWest" type="Boolean">false</setting>
+                <setting key="border" type="String">none</setting>
+                <setting key="broadcastHorizontalResize" type="Boolean">true</setting>
+                <setting key="centerBorder" type="String">none</setting>
+                <setting key="opaqueBG" type="String">true</setting>
+                <virtual-sockets/>
+            </widget>
+
+
+            <setting key="perspectiveImageUrl" type="String">/cng/images/dashboard.png</setting>
+            <setting key="westDisabled" type="Boolean">true</setting>
+            <setting key="southBorder" type="String">none</setting>
+            <setting key="northHeight" type="String">75px</setting>
+            <setting key="northBorder" type="String">none</setting>
+            <setting key="northCollapsible" type="Boolean">true</setting>
+            <setting key="westCollapsible" type="Boolean">true</setting>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="southDisabled" type="Boolean">true</setting>
+            <setting key="eastClosed" type="Boolean">false</setting>
+            <setting key="westWidth" type="String">300px</setting>
+            <setting key="autoCloseWest" type="Boolean">false</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="eastBorder" type="String">none</setting>
+            <setting key="southHeight" type="String">50px</setting>
+            <setting key="border" type="String">none</setting>
+            <setting key="northDisabled" type="Boolean">false</setting>
+            <setting key="eastWidth" type="String">25%</setting>
+            <setting key="westClosed" type="Boolean">false</setting>
+            <setting key="eastDisabled" type="Boolean">true</setting>
+            <setting key="eastCollapsible" type="Boolean">true</setting>
+            <setting key="broadcastHorizontalResize" type="Boolean">true</setting>
+            <setting key="centerBorder" type="String">none</setting>
+            <setting key="northClosed" type="Boolean">false</setting>
+            <setting key="westBorder" type="String">none</setting>
+            <setting key="opaqueBG" type="String">true</setting>
+            <setting key="southClosed" type="Boolean">false</setting>
+            <setting key="southCollapsible" type="Boolean">true</setting>
+            <virtual-sockets/>
+        </widget>
+
+        <!-- Configuration -->
+        <widget id="textmaster-widget-configuration" widgetDefinitionId="com.hybris.cockpitng.borderlayout" slotId="perspectives"
+                title="TextMaster Configuration" template="false">
+            <widget id="textmaster-widget-configuration-toolbar" widgetDefinitionId="com.textmaster.widgets.accounttoolbar"
+                    slotId="headerSlot" template="false">
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+            <widget id="textmaster-widget-configuration-center-layout"
+                    widgetDefinitionId="com.textmaster.widgets.globalaccountconfiguration" slotId="centerSlot" template="false">
+                <virtual-sockets/>
+            </widget>
+            <widget id="textmaster-widget-configuration-accounts" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser"
+                    slotId="leftSlot" template="false">
+                <setting key="itemRenderer" type="String">listViewRenderer</setting>
+                <setting key="sortableListHeader" type="Boolean">true</setting>
+                <setting key="asyncLoading" type="Boolean">true</setting>
+                <setting key="pageSize" type="Integer">50</setting>
+                <setting key="maxCharsInCell" type="Integer">70</setting>
+                <setting key="listTitle" type="String"></setting>
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="actionSlotComponentId" type="String">listviewactions</setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="colConfigCtxCode" type="String">listview</setting>
+                <setting key="listSubtitle" type="String"></setting>
+                <setting key="multiSelect" type="Boolean">false</setting>
+                <setting key="socketDataType_$T" type="String">com.textmaster.core.model.TextMasterAccountModel</setting>
+                <virtual-sockets/>
+            </widget>
+            <setting key="perspectiveImageUrl" type="String">/cng/images/settings.png</setting>
+            <setting key="westDisabled" type="Boolean">false</setting>
+            <setting key="southBorder" type="String">none</setting>
+            <setting key="northHeight" type="String">75px</setting>
+            <setting key="northBorder" type="String">none</setting>
+            <setting key="northCollapsible" type="Boolean">true</setting>
+            <setting key="westCollapsible" type="Boolean">true</setting>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="southDisabled" type="Boolean">true</setting>
+            <setting key="eastClosed" type="Boolean">false</setting>
+            <setting key="westWidth" type="String">400px</setting>
+            <setting key="autoCloseWest" type="Boolean">false</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="eastBorder" type="String">none</setting>
+            <setting key="southHeight" type="String">50px</setting>
+            <setting key="border" type="String">none</setting>
+            <setting key="northDisabled" type="Boolean">false</setting>
+            <setting key="eastWidth" type="String">25%</setting>
+            <setting key="westClosed" type="Boolean">false</setting>
+            <setting key="eastDisabled" type="Boolean">true</setting>
+            <setting key="eastCollapsible" type="Boolean">true</setting>
+            <setting key="broadcastHorizontalResize" type="Boolean">true</setting>
+            <setting key="centerBorder" type="String">none</setting>
+            <setting key="northClosed" type="Boolean">false</setting>
+            <setting key="westBorder" type="String">none</setting>
+            <setting key="opaqueBG" type="String">true</setting>
+            <setting key="southClosed" type="Boolean">false</setting>
+            <setting key="southCollapsible" type="Boolean">true</setting>
+            <virtual-sockets/>
+        </widget>
+    </widget-extension>
+
+    <!-- **************** -->
+    <!-- Project Creation -->
+    <!-- **************** -->
+
+    <widget-connection sourceWidgetId="textmaster-widget-creation-search-engine" outputId="pageable"
+                       targetWidgetId="textmaster-widget-creation-document-list" inputId="pageable"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-document-list" outputId="selectedItems"
+                       targetWidgetId="textmaster-widget-creation-project-summary" inputId="items"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-form" outputId="type"
+                       targetWidgetId="textmaster-widget-creation-search" inputId="type"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-search" outputId="searchData"
+                       targetWidgetId="textmaster-widget-creation-search-engine" inputId="searchData"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-form" outputId="init"
+                       targetWidgetId="textmaster-widget-creation-project-summary" inputId="init"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="accountSelectedForExternalComponents"
+                       targetWidgetId="textmaster-widget-accounts-loader" inputId="selectedAccount"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="accountSelectedForLocalComponents"
+                       targetWidgetId="textmaster-widget-creation-form" inputId="accountSelected"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="createContext"
+                       targetWidgetId="createActionTypeExtractor" inputId="genericInput"/>
+
+    <!-- Reset data when account change -->
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-document-list" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-form" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-project-summary" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-dashboard-projects" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-dashboard-documents" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-tab" inputId="openWest"/>
+
+    <widget-connection sourceWidgetId="configurableFlow" outputId="wizardResult"
+                       targetWidgetId="textmaster-widget-accounts-loader" inputId="refresh"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-form" outputId="init"
+                       targetWidgetId="textmaster-widget-creation-tab" inputId="closeWest"/>
+
+    <!-- Reset data when project is created -->
+    <widget-connection sourceWidgetId="textmaster-widget-creation-project-summary" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-document-list" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-project-summary" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-form" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-search" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-document-list" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-project-summary" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-tab" inputId="openWest"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-project-summary" outputId="account"
+                       targetWidgetId="textmaster-widget-dashboard-projects-loader" inputId="account"/>
+    <widget-connection sourceWidgetId="textmaster-widget-creation-project-summary" outputId="selectPerspective"
+                       targetWidgetId="backofficeMainSlot" inputId="selectPerspective"/>
+
+    <!-- ********* -->
+    <!-- Dashboard -->
+    <!-- ********* -->
+
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="createContext"
+                       targetWidgetId="createActionTypeExtractor" inputId="genericInput"/>
+    <widget-connection sourceWidgetId="configurableFlow" outputId="wizardResult"
+                       targetWidgetId="textmaster-widget-accounts-loader" inputId="refresh"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="accountSelectedForExternalComponents"
+                       targetWidgetId="textmaster-widget-accounts-loader" inputId="selectedAccount"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="accountSelectedForLocalComponents"
+                       targetWidgetId="textmaster-widget-dashboard-projects-loader" inputId="account"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-projects-loader" outputId="projects"
+                       targetWidgetId="textmaster-widget-dashboard-projects" inputId="list"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-projects" outputId="selectedItem"
+                       targetWidgetId="textmaster-widget-dashboard-documents-loader" inputId="project"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-projects" outputId="account"
+                       targetWidgetId="textmaster-widget-dashboard-projects-loader" inputId="account"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-documents-loader" outputId="documents"
+                       targetWidgetId="textmaster-widget-dashboard-documents" inputId="list"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-documents" outputId="selectedItem"
+                       targetWidgetId="textmaster-widget-dashboard-document-editor" inputId="inputObject"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-documents" outputId="selectedItem"
+                       targetWidgetId="textmaster-widget-dashboard-layout-center" inputId="openEast"/>
+    <widget-connection sourceWidgetId="configurableFlow" outputId="wizardResult"
+                       targetWidgetId="textmaster-widget-dashboard-sendsupportmessage" inputId="wizardResult"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="accountSelectedForLocalComponents"
+                       targetWidgetId="textmaster-widget-dashboard-sendsupportmessage" inputId="account"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-projects" outputId="selectedItem"
+                       targetWidgetId="textmaster-widget-dashboard-sendsupportmessage" inputId="project"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-documents" outputId="selectedItem"
+                       targetWidgetId="textmaster-widget-dashboard-sendsupportmessage" inputId="document"/>
+
+
+
+
+    <!-- Reset data when account change -->
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-document-list" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-form" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-creation-project-summary" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-dashboard-projects" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-dashboard-documents" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-tab" inputId="openWest"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-dashboard-document-editor" inputId="reset"/>
+    <widget-connection sourceWidgetId="textmaster-widget-dashboard-toolbar" outputId="reset"
+                       targetWidgetId="textmaster-widget-dashboard-layout-center" inputId="closeEast"/>
+
+
+    <!-- Plug actions to widgets -->
+    <widget-connection sourceWidgetId="STUB_com.textmaster.backoffice.widgets.actions.validatedocuments" outputId="account"
+                       targetWidgetId="textmaster-widget-dashboard-projects-loader" inputId="account"/>
+    <widget-connection sourceWidgetId="STUB_com.textmaster.backoffice.widgets.actions.validatedocuments" outputId="project"
+                       targetWidgetId="textmaster-widget-dashboard-documents-loader" inputId="project"/>
+
+
+    <!-- ************* -->
+    <!-- Configuration -->
+    <!-- ************* -->
+
+    <widget-connection sourceWidgetId="textmaster-widget-configuration-toolbar" outputId="createContext"
+                       targetWidgetId="createActionTypeExtractor" inputId="genericInput"/>
+    <widget-connection sourceWidgetId="configurableFlow" outputId="wizardResult"
+                       targetWidgetId="textmaster-widget-accounts-loader" inputId="refresh"/>
+    <widget-connection sourceWidgetId="textmaster-widget-configuration-toolbar" outputId="accountSelectedForExternalComponents"
+                       targetWidgetId="textmaster-widget-accounts-loader" inputId="selectedAccount"/>
+    <widget-connection sourceWidgetId="textmaster-widget-configuration-toolbar" outputId="accountSelectedForLocalComponents"
+                       targetWidgetId="textmaster-widget-configuration-center-layout" inputId="accountSelected"/>
+
+    <!-- ************** -->
+    <!-- Account loader -->
+    <!-- ************** -->
+
+    <widget-connection sourceWidgetId="textmaster-widget-accounts-loader" outputId="accounts"
+                       targetWidgetId="textmaster-widget-creation-toolbar" inputId="accounts"/>
+    <widget-connection sourceWidgetId="textmaster-widget-accounts-loader" outputId="selectAccount"
+                       targetWidgetId="textmaster-widget-creation-toolbar" inputId="selectAccount"/>
+
+    <widget-connection sourceWidgetId="textmaster-widget-accounts-loader" outputId="accounts"
+                       targetWidgetId="textmaster-widget-dashboard-toolbar" inputId="accounts"/>
+    <widget-connection sourceWidgetId="textmaster-widget-accounts-loader" outputId="selectAccount"
+                       targetWidgetId="textmaster-widget-dashboard-toolbar" inputId="selectAccount"/>
+
+    <widget-connection sourceWidgetId="textmaster-widget-accounts-loader" outputId="accounts"
+                       targetWidgetId="textmaster-widget-configuration-toolbar" inputId="accounts"/>
+    <widget-connection sourceWidgetId="textmaster-widget-accounts-loader" outputId="selectAccount"
+                       targetWidgetId="textmaster-widget-configuration-toolbar" inputId="selectAccount"/>
+    <widget-connection sourceWidgetId="textmaster-widget-accounts-loader" outputId="accounts"
+                       targetWidgetId="textmaster-widget-configuration-accounts" inputId="list"/>
+
+</widgets>

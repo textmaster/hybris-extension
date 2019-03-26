@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:w="http://www.zkoss.org/2005/zk/client"
+        xmlns:zk="http://www.zkoss.org/2005/zk"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+
+    <panel vflex="true" id="summaryPanel" collapsible="false" sclass="tm-panel">
+        <panelchildren>
+            <tabbox id="summaryTabs" mold="accordion" vflex="1">
+                <tabs>
+                    <tab label="${labels.title}" />
+                </tabs>
+                <tabpanels>
+                    <tabpanel>
+                        <label id="noAccountSelectedLabel" value="${labels.noaccountselected}" visible="true"/>
+                        <grid id="summaryGrid" visible="false">
+                            <columns>
+                                <column width="80px" />
+                                <column />
+                            </columns>
+                            <rows>
+                                <row>
+                                    <label value="${labels.account}" />
+                                    <label id="accountLabel" />
+                                </row>
+                                <row>
+                                    <label value="${labels.name}" />
+                                    <label id="nameLabel" />
+                                </row>
+                                <row>
+                                    <label value="${labels.template}" />
+                                    <label id="templatesLabel" />
+                                </row>
+                                <row>
+                                    <label value="${labels.type}" />
+                                    <label id="typeLabel" />
+                                </row>
+                                <row>
+                                    <label value="${labels.attributes}" />
+                                    <label id="attributesLabel" />
+                                </row>
+                                <row>
+                                    <label value="${labels.itemscount}" />
+                                    <label id="counterLabel" value="0" />
+                                </row>
+                                <row>
+                                    <cell colspan="2" style="text-align:center">
+                                        <button id="sendButton" label="${labels.createproject}" disabled="true" />
+                                    </cell>
+                                </row>
+                            </rows>
+                        </grid>
+                    </tabpanel>
+                </tabpanels>
+            </tabbox>
+        </panelchildren>
+    </panel>
+</widget>

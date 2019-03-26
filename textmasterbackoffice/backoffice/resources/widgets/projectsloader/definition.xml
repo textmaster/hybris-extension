@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="com.textmaster.widgets.loader.projects">
+    <name>TextMaster Projects Loader Widget</name>
+    <description>Allows to load projects of specific account</description>
+    <version>1.0</version>
+    <view src="none"/>
+    <keywords>
+        <keyword>Textmaster</keyword>
+    </keywords>
+    <controller class="com.textmaster.backoffice.widgets.TextMasterProjectsLoaderController"/>
+    <sockets>
+        <input id="account" type="com.textmaster.core.model.TextMasterAccountModel"/>
+        <output id="projects" type="com.textmaster.core.model.TextMasterProjectModel" multiplicity="List"/>
+    </sockets>
+</widget-definition>

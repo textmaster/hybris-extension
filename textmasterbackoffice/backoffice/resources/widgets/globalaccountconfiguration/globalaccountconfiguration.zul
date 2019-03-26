@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:w="http://www.zkoss.org/2005/zk/client"
+        xmlns:zk="http://www.zkoss.org/2005/zk"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+        height="100%">
+
+    <panel vflex="true" id="summaryPanel" collapsible="false" sclass="tm-panel">
+        <panelchildren>
+            <label id="noAccountSelectedLabel" value="${labels.noaccountselected}" visible="true"/>
+            <tabbox id="configurationTabs" mold="accordion" vflex="1" visible="false">
+                <tabs>
+                    <tab label="${labels.title}"/>
+                </tabs>
+                <tabpanels>
+                    <tabpanel style="overflow:auto">
+                        <grid id="summaryGrid" visible="true">
+                            <columns>
+                                <column width="100px"/>
+                                <column/>
+                            </columns>
+                            <rows>
+                                <row valign="top">
+                                    <label value="${labels.language.source.title}" vflex="true"/>
+                                    <combobox id="comboLanguageSource" readonly="true" hflex="true"/>
+                                </row>
+                                <row valign="top">
+                                    <label value="${labels.language.target.title}" vflex="true"/>
+                                    <combobox id="comboLanguageTarget" readonly="true" hflex="true"/>
+                                </row>
+                                <row valign="top">
+                                    <label value="${labels.types.title}"/>
+                                    <tree id="typesTree" multiple="true" checkmark="true" sclass="tm-typestree">
+                                        <template name="model">
+                                            <treeitem>
+                                                <treerow>
+                                                    <treecell label="${each.name}"/>
+                                                </treerow>
+                                            </treeitem>
+                                        </template>
+                                    </tree>
+                                </row>
+                                <row valign="top">
+                                    <label value="${labels.attributes.title}"/>
+
+                                    <grid visible="true">
+                                        <columns>
+                                            <column/>
+                                            <column/>
+                                        </columns>
+                                        <rows>
+                                            <row valign="top">
+                                                <vbox>
+                                                    <listbox id="typesListBox" visible="false">
+                                                        <listhead>
+                                                            <listheader label="Types"/>
+                                                        </listhead>
+                                                    </listbox>
+                                                    <label id="typesListBoxErrorLabel" value="${labels.notypes}" visible="true"/>
+                                                </vbox>
+                                                <vbox>
+                                                    <listbox id="attributesListBox" multiple="true" checkmark="true"
+                                                             visible="false">
+                                                        <listhead>
+                                                            <listheader label="Attributes"/>
+                                                        </listhead>
+                                                    </listbox>
+                                                    <label id="attributesListBoxErrorLabel" value="${labels.noattributes}"
+                                                           visible="false"/>
+                                                    <label id="attributesErrorLabel" value="${labels.noattributesfound}"
+                                                           visible="false"/>
+                                                </vbox>
+                                            </row>
+                                        </rows>
+                                    </grid>
+                                </row>
+                                <row>
+                                    <cell colspan="2" style="text-align:right">
+                                        <button id="saveButton" label="${labels.save}"/>
+                                    </cell>
+                                </row>
+                            </rows>
+                        </grid>
+                    </tabpanel>
+                </tabpanels>
+            </tabbox>
+        </panelchildren>
+    </panel>
+</widget>

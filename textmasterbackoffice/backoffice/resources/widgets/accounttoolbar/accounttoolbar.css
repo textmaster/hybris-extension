@@ -1,0 +1,24 @@
+.yw-textmaster-header {
+	width: 100%;
+	height: 75px;
+	background-color: white;
+}
+
+.yw-textmaster-header-layout {
+	width: 100%;
+	height: 100%;
+}
+
+.yw-textmaster-logo {
+	width: 250px;
+}
+
+.yw-com_hybris_backoffice_perspectiveChooser.widget_body .yw-perspective-menu .z-menuitem,
+.yw-com_hybris_backoffice_perspectiveChooser.widget_body .yw-perspective-menu .z-menu-button,
+.yw-com_hybris_backoffice_perspectiveChooser.widget_body .yw-perspective-menu .z-menuitem:hover,
+.yw-com_hybris_backoffice_perspectiveChooser.widget_body .yw-perspective-menu .z-menu-button:hover,
+.yw-com_hybris_backoffice_perspectiveChooser.widget_body .yw-perspective-menu .z-menuitem.yw-selectednode,
+.yw-com_hybris_backoffice_perspectiveChooser.widget_body .yw-perspective-menu .z-menuitem.yw-selectednode:hover {
+	background: none;
+}
+

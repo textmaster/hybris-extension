@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2015 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <alias name="defaultTextMasterPreviewUrlResolverPageMappings" alias="textMasterPreviewUrlResolverPageMappings"/>
+    <util:map id="defaultTextMasterPreviewUrlResolverPageMappings">
+        <entry key="homepage" value="/"/>
+        <entry key="cartPage" value="/cart"/>
+        <entry key="search" value="/search"/>
+        <entry key="searchEmpty" value="/search"/>
+        <entry key="account" value="/my-account"/>
+        <entry key="profile" value="/my-account/profile"/>
+        <entry key="address-book" value="/my-account/address-book"/>
+        <entry key="add-edit-address" value="/my-account/add-edit-address"/>
+        <entry key="payment-details" value="/my-account/payment-details"/>
+        <entry key="order" value="/my-account/order"/>
+        <entry key="orders" value="/my-account/orders"/>
+        <entry key="multiStepCheckoutSummaryPage" value="/checkout/multi/add-delivery-address"/>
+        <entry key="storefinderPage" value="/store-finder"/>
+        <entry key="login" value="/login"/>
+        <entry key="checkout-login" value="/login/checkout"/>
+        <entry key="forgottenPassword" value="/login/pw/request"/>
+        <entry key="updatePassword" value="/my-account/update-password"/>
+        <entry key="notFound" value="/error"/>
+
+        <!--Configuration WCMS Mobile Page to URL -->
+        <entry key="mobile-homepage" value="/"/>
+        <entry key="mobile-cartPage" value="/cart"/>
+        <entry key="mobile-search" value="/search"/>
+        <entry key="mobile-searchEmpty" value="/search"/>
+        <entry key="mobile-account" value="/my-account"/>
+        <entry key="mobile-profile" value="/my-account/profile"/>
+        <entry key="mobile-address-book" value="/my-account/address-book"/>
+        <entry key="mobile-add-edit-address" value="/my-account/add-edit-address"/>
+        <entry key="mobile-payment-details" value="/my-account/payment-details"/>
+        <entry key="mobile-order" value="/my-account/order"/>
+        <entry key="mobile-orders" value="/my-account/orders"/>
+        <entry key="mobile-multiStepCheckoutSummaryPage" value="/checkout/multi/add-delivery-address"/>
+        <entry key="mobile-storefinderPage" value="/store-finder"/>
+        <entry key="mobile-login" value="/login"/>
+        <entry key="mobile-checkout-login" value="/login/checkout"/>
+        <entry key="mobile-forgottenPassword" value="/login/pw/request"/>
+        <entry key="mobile-updatePassword" value="/my-account/update-password"/>
+        <entry key="mobile-register" value="/register"/>
+        <entry key="mobile-orderConfirmationPage" value="/my-account/order"/>
+        <entry key="mobile-notFound" value="/error"/>
+    </util:map>
+
+</beans>

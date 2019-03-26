@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2015 hybris AG ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of hybris ~ ("Confidential Information"). You
+	shall not disclose such Confidential ~ Information and shall use it only 
+	in accordance with the terms of the ~ license agreement you entered into 
+	with hybris. -->
+
+<config xmlns="http://www.hybris.com/cockpit/config">
+
+    <!-- List view actions -->
+
+    <context component="textmaster-projects-listviewactions" type="TextMasterProject"
+             xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+            </y:group>
+        </y:actions>
+    </context>
+
+    <context component="textmaster-documents-listviewactions" type="TextMasterDocument"
+             xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+        <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:group qualifier="common">
+                <y:action action-id="com.textmaster.backoffice.widgets.actions.validatedocuments" property="selectedObjects"/>
+            </y:group>
+        </y:actions>
+
+    </context>
+
+    <!-- Advanced Search -->
+
+    <context type="Product" component="advanced-search">
+        <as:advanced-search xmlns:as="http://www.hybris.com/cockpitng/config/advancedsearch" connection-operator="AND">
+            <as:field-list>
+                <as:field name="catalogVersion" operator="equals" selected="true"/>
+                <as:field name="supercategories" operator="equals" selected="true"/>
+                <as:field name="code" operator="equals" selected="false"/>
+                <as:field name="approvalStatus" operator="equals" selected="false"/>
+                <as:field name="modifiedtime" operator="greaterOrEquals" selected="false"/>
+            </as:field-list>
+        </as:advanced-search>
+    </context>
+
+    <!-- List View -->
+
+    <context type="TextMasterAccount" component="listview">
+        <list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+            <list:column qualifier="name"/>
+            <list:column qualifier="apiKey"/>
+            <list:column qualifier="apiSecret"/>
+        </list:list-view>
+    </context>
+
+    <context type="TextMasterProject" component="listview">
+        <list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+            <list:column qualifier="name"/>
+            <list:column qualifier="reference"/>
+            <list:column qualifier="modifiedtime" spring-bean="textMasterDateRenderer"
+                         label="project.listview.column.modifiedtime"/>
+            <list:column qualifier="languageTarget.isocode" label="project.listview.column.languagetarget"/>
+            <list:column qualifier="translatedItemType.code" label="project.listview.column.type"/>
+            <list:column spring-bean="textMasterProjectNbDocumentsRenderer" label="project.listview.column.numberitems"/>
+            <list:column qualifier="totalWordCount" label="project.listview.column.totalwordcount"/>
+            <list:column qualifier="price" spring-bean="textMasterProjectPriceRenderer" label="project.listview.column.price"/>
+            <list:column qualifier="status" spring-bean="textMasterEnumRenderer" label="project.listview.column.status"/>
+            <list:column spring-bean="textMasterProjectActionsRenderer" label="project.listview.column.actions"/>
+        </list:list-view>
+    </context>
+
+    <context type="TextMasterDocument" component="listview">
+        <list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+            <list:column qualifier="remoteId"/>
+            <list:column qualifier="item.name" label="document.listview.column.itemname"/>
+            <list:column qualifier="wordCount" label="document.listview.column.totalwordcount"/>
+            <list:column qualifier="status" spring-bean="textMasterEnumRenderer" label="document.listview.column.status"/>
+            <list:column spring-bean="textMasterDocumentActionsRenderer" label="document.listview.column.actions"/>
+        </list:list-view>
+    </context>
+
+    <context type="TextMasterDocumentAttribute" component="textMasterDocumentAttributesListView">
+        <list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+            <list:column qualifier="attribute.qualifier" label="documentattribute.listview.column.attribute.qualifier"/>
+        </list:list-view>
+    </context>
+
+
+    <context type="TextMasterSupportMessage" component="textMasterSupportMessagesListView">
+        <list:list-view xmlns:list="http://www.hybris.com/cockpitng/component/listView">
+            <list:column qualifier="code" label="supportmessage.listview.column.code"/>
+            <list:column qualifier="message" label="supportmessage.listview.column.message"/>
+            <list:column qualifier="authorId" label="supportmessage.listview.column.authorid"/>
+            <list:column qualifier="authorReference" label="supportmessage.listview.column.authorreference"/>
+            <list:column qualifier="hybrisOwner" label="supportmessage.listview.column.hybrisowner"/>
+            <list:column qualifier="date" label="supportmessage.listview.column.date"/>
+        </list:list-view>
+    </context>
+
+
+    <!-- Wizard -->
+
+    <context type="TextMasterAccount" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="TextMasterAccountWizard"
+                 title="textmasteraccount.create.title">
+            <wz:prepare id="accountPrepare">
+                <wz:initialize property="newAccount" type="TextMasterAccount"/>
+                <wz:assign property="code" value="ctx.code"/>
+                <wz:assign property="name" value="ctx.name"/>
+                <wz:assign property="apiKey" value="ctx.apiKey"/>
+                <wz:assign property="apiSecret" value="ctx.apiSecret"/>
+            </wz:prepare>
+            <wz:step id="step1" label="textmasteraccount.create.essential.label"
+                     sublabel="textmasteraccount.create.essential.sublabel">
+                <wz:info id="step1.intro" label="textmasteraccount.create.essential.intro" position="top"/>
+                <wz:content id="step1.content">
+                    <wz:property-list root="newAccount">
+                        <wz:property qualifier="name" type="java.lang.String"/>
+                        <wz:property qualifier="apiKey" type="java.lang.String"/>
+                        <wz:property qualifier="apiSecret" type="java.lang.String"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done visible="!#empty(newAccount.name) AND !#empty(newAccount.apiKey) AND !#empty(newAccount.apiSecret)">
+                        <wz:save property="newAccount"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+    <context type="TextMasterSupportMessage" component="create-wizard">
+        <wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="TextMasterSupportMessageWizard"
+                 title="textmastersupportmessage.create.title">
+            <wz:prepare id="supportMessagePrepare">
+                <wz:initialize property="newSupportMessage" type="TextMasterSupportMessage"/>
+                <wz:assign property="code" value="ctx.code"/>
+                <wz:assign property="message" value="ctx.message"/>
+            </wz:prepare>
+            <wz:step id="step1" label="textmastersupportmessage.create.essential.label"
+                     sublabel="textmastersupportmessage.create.essential.sublabel">
+                <wz:info id="step1.intro" label="textmastersupportmessage.create.essential.intro" position="top"/>
+                <wz:content id="step1.content">
+                    <wz:property-list root="newSupportMessage">
+                        <wz:property qualifier="message" type="java.lang.String"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done>
+                        <wz:save property="newSupportMessage"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+    <!-- Editor Area -->
+
+    <context merge-by="type" component="editor-area" type="TextMasterProject">
+        <ea:editorArea xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea">
+            <ea:tab name="General" position="1">
+                <ea:section name="Global Informations" columns="3">
+                    <ea:attribute qualifier="name"/>
+                    <ea:attribute qualifier="code"/>
+                    <ea:attribute qualifier="templateId"/>
+                </ea:section>
+                <ea:section name="Documents" columns="1">
+                    <ea:attribute qualifier="documents"/>
+                </ea:section>
+            </ea:tab>
+        </ea:editorArea>
+    </context>
+
+    <context merge-by="type" component="editor-area" type="TextMasterDocument">
+        <ea:editorArea xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea">
+            <ea:essentials>
+                <ea:essentialSection name="document.editor.sections.identifiers">
+                    <ea:attribute qualifier="code" label="document.editor.attribute.code" readonly="true"/>
+                    <ea:attribute qualifier="remoteId" label="document.editor.attribute.remoteid" readonly="true"/>
+                    <ea:attribute qualifier="reference" label="document.editor.attribute.reference" readonly="true"/>
+                </ea:essentialSection>
+            </ea:essentials>
+            <ea:tab name="document.editor.tabs.general" position="1">
+                <ea:section name="document.editor.sections.infos">
+
+                    <ea:panel name="">
+                        <ea:attribute qualifier="status" label="document.editor.attribute.status" readonly="true"/>
+                        <ea:attribute qualifier="item" label="document.editor.attribute.item"
+                                      editor="com.hybris.cockpitng.editor.defaultreferenceeditor" readonly="true">
+                            <ea:editor-parameter>
+                                <ea:name>isNestedObjectCreationDisabled</ea:name>
+                                <ea:value>true</ea:value>
+                            </ea:editor-parameter>
+                            <ea:editor-parameter>
+                                <ea:name>disableRemoveReference</ea:name>
+                                <ea:value>true</ea:value>
+                            </ea:editor-parameter>
+                        </ea:attribute>
+                        <ea:attribute qualifier="documentAttributes" label="document.editor.attribute.documentattributes"
+                                      editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+                            <ea:editor-parameter>
+                                <ea:name>listConfigContext</ea:name>
+                                <ea:value>textMasterDocumentAttributesListView</ea:value>
+                            </ea:editor-parameter>
+                            <ea:editor-parameter>
+                                <ea:name>isNestedObjectCreationDisabled</ea:name>
+                                <ea:value>true</ea:value>
+                            </ea:editor-parameter>
+                            <ea:editor-parameter>
+                                <ea:name>disableRemoveReference</ea:name>
+                                <ea:value>true</ea:value>
+                            </ea:editor-parameter>
+                        </ea:attribute>
+                    </ea:panel>
+                </ea:section>
+            </ea:tab>
+
+            <ea:tab name="document.editor.tabs.supportmessage" position="2">
+                <ea:section name="document.editor.sections.supportmessage">
+                    <ea:panel name="" colspan="2">
+                        <ea:attribute qualifier="supportMessages" label="document.editor.attribute.supportmessages"
+                                      editor="com.hybris.cockpitng.editor.extendedmultireferenceeditor">
+                            <ea:editor-parameter>
+                                <ea:name>listConfigContext</ea:name>
+                                <ea:value>textMasterSupportMessagesListView</ea:value>
+                            </ea:editor-parameter>
+                        </ea:attribute>
+                    </ea:panel>
+                </ea:section>
+            </ea:tab>
+
+            <ea:tab name="hmc.administration" position="3">
+                <ea:customSection spring-bean="unboundSectionRenderer" name="Unbound"/>
+            </ea:tab>
+        </ea:editorArea>
+    </context>
+
+    <context merge-by="type" component="editor-area" type="TextMasterDocumentAttribute">
+        <ea:editorArea xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea">
+            <ea:tab name="documentattribute.editor.tabs.general" position="1">
+                <ea:section name="documentattribute.editor.sections.infos">
+                    <ea:panel name="">
+                        <ea:attribute qualifier="originalContent" editor="com.hybris.cockpitng.editor.wysiwyg" readonly="true"/>
+                        <ea:attribute qualifier="translatedContent" editor="com.hybris.cockpitng.editor.wysiwyg" readonly="true"/>
+                    </ea:panel>
+                </ea:section>
+            </ea:tab>
+        </ea:editorArea>
+    </context>
+
+
+    <!-- Base data -->
+
+    <context type="TextMasterDocumentAttribute" component="base">
+        <y:base xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+            <y:labels>
+                <y:label>attribute?.qualifier</y:label>
+            </y:labels>
+        </y:base>
+    </context>
+</config>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2013 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<widget xmlns="http://www.zkoss.org/2005/zul"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.hybris.com/schema/cockpitng/zul/zul.xsd"
+		  height="100%">
+
+	<div height="100%" style="background: white;">
+		<vlayout height="100%" spacing="none">
+			<widgetslot slotID="wizardNotificationarea" sclass="yw-notification"/>
+			<div id="breadcrumbDiv" sclass="yw-wizard-breadcrumb-cnt"/>
+			<div id="msgAreaDiv" sclass="yw-wizard-msgArea-cnt"/>
+			<div id="contentDiv" vflex="1"/>			
+			<div id="navigationDiv" sclass="yw-wizard-navigation">
+				<div sclass="yw-left-pack">
+					<button id="btCancel" label="btCancel"  />					
+				</div>
+				<div sclass="yw-right-pack">
+					<button id="btSave" label="btSave" />
+				</div>				
+			</div>
+		</vlayout>
+	</div>
+</widget>

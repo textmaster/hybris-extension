@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="com.textmaster.widgets.loader.documents">
+    <name>TextMaster Documents Loader Widget</name>
+    <description>Allows to load documents of specific project</description>
+    <version>1.0</version>
+    <view src="none"/>
+    <keywords>
+        <keyword>Textmaster</keyword>
+    </keywords>
+    <controller class="com.textmaster.backoffice.widgets.TextMasterDocumentsLoaderController"/>
+    <sockets>
+        <input id="project" type="com.textmaster.core.model.TextMasterProjectModel"/>
+        <output id="documents" type="com.textmaster.core.model.TextMasterDocumentModel" multiplicity="List"/>
+    </sockets>
+</widget-definition>

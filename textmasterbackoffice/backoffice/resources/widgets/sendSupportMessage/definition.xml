@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<widget-definition
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+        id="com.textmaster.backoffice.widgets.sendsupportmessage">
+    <name>Send Support Message to TextMaster</name>
+    <version>1.0</version>
+    <view src="none"/>
+    <keywords>
+        <keyword>Textmaster</keyword>
+    </keywords>
+    <controller
+            class="com.textmaster.backoffice.widgets.TextMasterSendSupportMessageController"/>
+    <sockets>
+        <input id="account" type="com.textmaster.core.model.TextMasterAccountModel"/>
+        <input id="project" type="com.textmaster.core.model.TextMasterProjectModel"/>
+        <input id="document" type="com.textmaster.core.model.TextMasterDocumentModel"/>
+        <input id="wizardResult" type="java.util.Map"/>
+    </sockets>
+</widget-definition>
