@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- Global beans -->
+
+    <alias name="defaultTextMasterRootClasses" alias="textMasterRootClasses"/>
+    <util:list id="defaultTextMasterRootClasses">
+        <value type="java.lang.Class">de.hybris.platform.core.model.product.ProductModel</value>
+        <value type="java.lang.Class">de.hybris.platform.category.model.CategoryModel</value>
+        <value type="java.lang.Class">de.hybris.platform.cms2.model.contents.CMSItemModel</value>
+    </util:list>
+
+    <!-- DAOs -->
+
+    <alias name="defaultTextMasterAccountDao" alias="textMasterAccountDao"/>
+    <bean id="defaultTextMasterAccountDao" class="com.textmaster.core.daos.impl.DefaultTextMasterAccountDao"
+          scope="tenant" parent="abstractItemDao"/>
+
+    <alias name="defaultTextMasterLanguageDao" alias="textMasterLanguageDao"/>
+    <bean id="defaultTextMasterLanguageDao" class="com.textmaster.core.daos.impl.DefaultTextMasterLanguageDao"
+          scope="tenant" parent="abstractItemDao"/>
+
+    <alias name="defaultTextMasterProjectDao" alias="textMasterProjectDao"/>
+    <bean id="defaultTextMasterProjectDao" class="com.textmaster.core.daos.impl.DefaultTextMasterProjectDao"
+          scope="tenant" parent="abstractItemDao"/>
+
+    <alias name="defaultTextMasterDocumentDao" alias="textMasterDocumentDao"/>
+    <bean id="defaultTextMasterDocumentDao" class="com.textmaster.core.daos.impl.DefaultTextMasterDocumentDao"
+          scope="tenant" parent="abstractItemDao"/>
+
+    <!-- Services -->
+
+    <alias name="defaultTextMasterApiService" alias="textMasterApiService"/>
+    <bean id="defaultTextMasterApiService" class="com.textmaster.core.services.impl.DefaultTextMasterApiService"
+          scope="tenant">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultTextMasterAccountService" alias="textMasterAccountService"/>
+    <bean id="defaultTextMasterAccountService" class="com.textmaster.core.services.impl.DefaultTextMasterAccountService"
+          scope="tenant">
+        <property name="textMasterAccountDao" ref="textMasterAccountDao"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="textMasterApiService" ref="textMasterApiService"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentService" alias="textMasterDocumentService"/>
+    <bean id="defaultTextMasterDocumentService"
+          class="com.textmaster.core.services.impl.DefaultTextMasterDocumentService" scope="tenant">
+        <property name="modelService" ref="modelService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="typeService" ref="typeService"/>
+        <property name="textMasterRootClasses" ref="textMasterRootClasses"/>
+        <property name="textMasterDocumentDao" ref="textMasterDocumentDao"/>
+        <property name="textMasterApiService" ref="textMasterApiService" />
+    </bean>
+
+    <alias name="defaultTextMasterProjectService" alias="textMasterProjectService"/>
+    <bean id="defaultTextMasterProjectService" class="com.textmaster.core.services.impl.DefaultTextMasterProjectService"
+          scope="tenant">
+        <property name="modelService" ref="modelService"/>
+        <property name="textMasterApiService" ref="textMasterApiService"/>
+        <property name="textMasterProjectConverter" ref="textMasterProjectConverter"/>
+        <property name="textMasterDocumentConverter" ref="textMasterDocumentConverter"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="textMasterProjectDao" ref="textMasterProjectDao"/>
+        <property name="textMasterDocumentService" ref="textMasterDocumentService"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="taskService" ref="taskService"/>
+        <property name="textMasterProjectStatusReverseStrategy" ref="textMasterProjectStatusReverseStrategy" />
+    </bean>
+
+    <alias name="defaultTextMasterLanguageService" alias="textMasterLanguageService"/>
+    <bean id="defaultTextMasterLanguageService"
+          class="com.textmaster.core.services.impl.DefaultTextMasterLanguageService" scope="tenant">
+        <property name="textMasterLanguageDao" ref="textMasterLanguageDao"/>
+    </bean>
+
+    <alias name="defaultTextMasterCommerceCommonI18NService" alias="commerceCommonI18NService"/>
+    <bean id="defaultTextMasterCommerceCommonI18NService"
+          class="com.textmaster.core.services.impl.DefaultTextMasterCommerceCommonI18NService"
+          parent="defaultCommerceCommonI18NService" scope="tenant">
+        <property name="textMasterLanguageService" ref="textMasterLanguageService"/>
+    </bean>
+    
+    <alias name="defaultTextMasterConfigurationService" alias="textMasterConfigurationService"/>
+    <bean id="defaultTextMasterConfigurationService" class="com.textmaster.core.services.impl.DefaultTextMasterConfigurationService"
+          scope="tenant">
+        <property name="modelService" ref="modelService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <alias name="defaultTextMasterMessageService" alias="textMasterMessageService"/>
+    <bean id="defaultTextMasterMessageService" class="com.textmaster.core.services.impl.DefaultTextMasterMessageService"
+          scope="tenant">
+        <property name="textMasterApiService" ref="textMasterApiService"/>
+    </bean>
+
+    <!-- Interceptors -->
+
+    <alias name="defaultTextMasterAccountPrepareInterceptor" alias="textMasterAccountPrepareInterceptor"/>
+    <bean id="defaultTextMasterAccountPrepareInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterAccountPrepareInterceptor">
+        <property name="codeGenerator" ref="textMasterAccountCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterAccountPrepareInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterAccountPrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterAccount"/>
+    </bean>
+
+    <alias name="defaultTextMasterAccountValidateInterceptor" alias="textMasterAccountValidateInterceptor"/>
+    <bean id="defaultTextMasterAccountValidateInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterAccountValidateInterceptor">
+        <property name="textMasterAccountService" ref="textMasterAccountService"/>
+    </bean>
+
+    <bean id="textMasterAccountValidateInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterAccountValidateInterceptor"/>
+        <property name="typeCode" value="TextMasterAccount"/>
+    </bean>
+
+    <alias name="defaultTextMasterProjectPrepareInterceptor" alias="textMasterProjectPrepareInterceptor"/>
+    <bean id="defaultTextMasterProjectPrepareInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterProjectPrepareInterceptor">
+        <property name="codeGenerator" ref="textMasterProjectCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterProjectPrepareInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterProjectPrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterProject"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentPrepareInterceptor" alias="textMasterDocumentPrepareInterceptor"/>
+    <bean id="defaultTextMasterDocumentPrepareInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterDocumentPrepareInterceptor">
+        <property name="codeGenerator" ref="textMasterDocumentCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterDocumentPrepareInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterDocumentPrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterDocument"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentAttributePrepareInterceptor"
+           alias="textMasterDocumentAttributePrepareInterceptor"/>
+    <bean id="defaultTextMasterDocumentAttributePrepareInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterDocumentAttributePrepareInterceptor">
+        <property name="codeGenerator" ref="textMasterDocumentAttributeCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterDocumentAttributePrepareInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterDocumentAttributePrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterDocumentAttribute"/>
+    </bean>
+
+    <alias name="defaultTextMasterSupportMessagePrepareInterceptor"
+           alias="textMasterSupportMessagePrepareInterceptor"/>
+    <bean id="defaultTextMasterSupportMessagePrepareInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterSupportMessagePrepareInterceptor">
+        <property name="codeGenerator" ref="textMasterSupportMessageCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterSupportMessagePrepareInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterSupportMessagePrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterSupportMessage"/>
+    </bean>
+
+	<alias name="defaultTextMasterConfigurationPrepareInterceptor" alias="textMasterConfigurationPrepareInterceptor"/>
+    <bean id="defaultTextMasterConfigurationPrepareInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterConfigurationPrepareInterceptor">
+        <property name="codeGenerator" ref="textMasterConfigurationCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterConfigurationPrepareInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterConfigurationPrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterConfiguration"/>
+    </bean>
+    
+    <alias name="defaultTextMasterItemTypePrepareInterceptor" alias="textMasterItemTypePrepareInterceptor"/>
+    <bean id="defaultTextMasterItemTypePrepareInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterItemTypePrepareInterceptor">
+        <property name="codeGenerator" ref="textMasterItemTypeCodeGenerator"/>
+    </bean>
+    
+    <bean id="textMasterItemTypePrepareInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterItemTypePrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterItemType"/>
+    </bean>
+
+    <!-- Code generators -->
+
+    <alias name="defaultTextMasterAccountCodeGenerator" alias="textMasterAccountCodeGenerator"/>
+    <bean id="defaultTextMasterAccountCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="${keygen.textmasteraccount.code.name}"/>
+        <property name="digits" value="${keygen.textmasteraccount.code.digits}"/>
+        <property name="start" value="${keygen.textmasteraccount.code.start}"/>
+        <property name="template" value="${keygen.textmasteraccount.code.template}"/>
+    </bean>
+
+    <alias name="defaultTextMasterProjectCodeGenerator" alias="textMasterProjectCodeGenerator"/>
+    <bean id="defaultTextMasterProjectCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="${keygen.textmasterproject.code.name}"/>
+        <property name="digits" value="${keygen.textmasterproject.code.digits}"/>
+        <property name="start" value="${keygen.textmasterproject.code.start}"/>
+        <property name="template" value="${keygen.textmasterproject.code.template}"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentCodeGenerator" alias="textMasterDocumentCodeGenerator"/>
+    <bean id="defaultTextMasterDocumentCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="${keygen.textmasterdocument.code.name}"/>
+        <property name="digits" value="${keygen.textmasterdocument.code.digits}"/>
+        <property name="start" value="${keygen.textmasterdocument.code.start}"/>
+        <property name="template" value="${keygen.textmasterdocument.code.template}"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentAttributeCodeGenerator" alias="textMasterDocumentAttributeCodeGenerator"/>
+    <bean id="defaultTextMasterDocumentAttributeCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="${keygen.textmasterdocumentattribute.code.name}"/>
+        <property name="digits" value="${keygen.textmasterdocumentattribute.code.digits}"/>
+        <property name="start" value="${keygen.textmasterdocumentattribute.code.start}"/>
+        <property name="template" value="${keygen.textmasterdocumentattribute.code.template}"/>
+    </bean>
+
+    <alias name="defaultTextMasterSupportMessageCodeGenerator" alias="textMasterSupportMessageCodeGenerator"/>
+    <bean id="defaultTextMasterSupportMessageCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="${keygen.textmastersupportmessage.code.name}"/>
+        <property name="digits" value="${keygen.textmastersupportmessage.code.digits}"/>
+        <property name="start" value="${keygen.textmastersupportmessage.code.start}"/>
+        <property name="template" value="${keygen.textmastersupportmessage.code.template}"/>
+    </bean>
+
+    <alias name="defaultTextMasterConfigurationCodeGenerator" alias="textMasterConfigurationCodeGenerator"/>
+    <bean id="defaultTextMasterConfigurationCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="${keygen.textmasterconfiguration.code.name}"/>
+        <property name="digits" value="${keygen.textmasterconfiguration.code.digits}"/>
+        <property name="start" value="${keygen.textmasterconfiguration.code.start}"/>
+        <property name="template" value="${keygen.textmasterconfiguration.code.template}"/>
+    </bean>
+    
+    <alias name="defaultTextMasterItemTypeCodeGenerator" alias="textMasterItemTypeCodeGenerator"/>
+    <bean id="defaultTextMasterItemTypeCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
+        <property name="key" value="${keygen.textmasteritemtype.code.name}"/>
+        <property name="digits" value="${keygen.textmasteritemtype.code.digits}"/>
+        <property name="start" value="${keygen.textmasteritemtype.code.start}"/>
+        <property name="template" value="${keygen.textmasteritemtype.code.template}"/>
+    </bean>
+    
+    <!-- Populators -->
+
+    <alias name="defaultTextMasterProjectPopulator" alias="textMasterProjectPopulator"/>
+    <bean id="defaultTextMasterProjectPopulator" class="com.textmaster.core.populators.TextMasterProjectPopulator"/>
+
+    <alias name="defaultTextMasterDocumentPopulator" alias="textMasterDocumentPopulator"/>
+    <bean id="defaultTextMasterDocumentPopulator" class="com.textmaster.core.populators.TextMasterDocumentPopulator">
+        <property name="modelService" ref="modelService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="textMasterTypeNameStrategies" ref="textMasterTypeNameStrategies"/>
+        <property name="textMasterDocumentService" ref="textMasterDocumentService"/>
+    </bean>
+
+    <alias name="defaultTextMasterSupportMessageReversePopulator" alias="textMasterSupportMessageReversePopulator"/>
+    <bean id="defaultTextMasterSupportMessageReversePopulator"
+          class="com.textmaster.core.populators.reverse.TextMasterSupportMessageReversePopulator"/>
+
+    <!-- Converters -->
+
+    <alias name="defaultTextMasterProjectConverter" alias="textMasterProjectConverter"/>
+    <bean id="defaultTextMasterProjectConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.textmaster.core.dtos.TextMasterProjectDto"/>
+        <property name="populators">
+            <list>
+                <ref bean="textMasterProjectPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentConverter" alias="textMasterDocumentConverter"/>
+    <bean id="defaultTextMasterDocumentConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.textmaster.core.dtos.TextMasterDocumentDto"/>
+        <property name="populators">
+            <list>
+                <ref bean="textMasterDocumentPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultTextMasterSupportMessageReverseConverter" alias="textMasterSupportMessageReverseConverter"/>
+    <bean id="defaultTextMasterSupportMessageReverseConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.textmaster.core.model.TextMasterSupportMessageModel"/>
+        <property name="populators">
+            <list>
+                <ref bean="textMasterSupportMessageReversePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Strategies -->
+
+    <alias name="defaultTextMasterDocumentStatusStrategy" alias="textMasterDocumentStatusStrategy"/>
+    <bean id="defaultTextMasterDocumentStatusStrategy"
+          class="com.textmaster.core.strategies.impl.DefaultTextMasterDocumentStatusStrategy"/>
+
+    <alias name="defaultTextMasterDocumentStatusReverseStrategy" alias="textMasterDocumentStatusReverseStrategy"/>
+    <bean id="defaultTextMasterDocumentStatusReverseStrategy"
+          class="com.textmaster.core.strategies.impl.DefaultTextMasterDocumentStatusReverseStrategy">
+        <property name="enumerationService" ref="enumerationService"/>
+    </bean>
+
+    <alias name="defaultTextMasterProjectStatusReverseStrategy" alias="textMasterProjectStatusReverseStrategy"/>
+    <bean id="defaultTextMasterProjectStatusReverseStrategy"
+          class="com.textmaster.core.strategies.impl.DefaultTextMasterProjectStatusReverseStrategy">
+        <property name="enumerationService" ref="enumerationService"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentProductNameStrategy" alias="textMasterDocumentProductNameStrategy"/>
+    <bean id="defaultTextMasterDocumentProductNameStrategy"
+          class="com.textmaster.core.strategies.impl.DefaultTextMasterDocumentProductNameStrategy">
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentCategoryNameStrategy" alias="textMasterDocumentCategoryNameStrategy"/>
+    <bean id="defaultTextMasterDocumentCategoryNameStrategy"
+          class="com.textmaster.core.strategies.impl.DefaultTextMasterDocumentCategoryNameStrategy">
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentCMSComponentNameStrategy" alias="textMasterDocumentCMSComponentNameStrategy"/>
+    <bean id="defaultTextMasterDocumentCMSComponentNameStrategy"
+          class="com.textmaster.core.strategies.impl.DefaultTextMasterDocumentCMSComponentNameStrategy"/>
+
+    <alias name="defaultTextMasterTypeNameStrategies" alias="textMasterTypeNameStrategies"/>
+    <util:map id="defaultTextMasterTypeNameStrategies">
+        <entry value-ref="textMasterDocumentProductNameStrategy">
+            <key>
+                <value type="java.lang.Class">de.hybris.platform.core.model.product.ProductModel</value>
+            </key>
+        </entry>
+
+        <entry value-ref="textMasterDocumentProductNameStrategy">
+            <key>
+                <value type="java.lang.Class">de.hybris.platform.category.model.CategoryModel</value>
+            </key>
+        </entry>
+
+        <entry value-ref="textMasterDocumentCMSComponentNameStrategy">
+            <key>
+                <value type="java.lang.Class">de.hybris.platform.cms2.model.contents.CMSItemModel</value>
+            </key>
+        </entry>
+    </util:map>
+
+    <!-- Cronjobs -->
+
+    <bean id="defaultTextMasterGetTranslationsPerformable"
+          class="com.textmaster.core.cronjobs.TextMasterGetTranslationsPerformable"
+          parent="abstractJobPerformable">
+        <property name="textMasterProjectService" ref="textMasterProjectService"/>
+        <property name="textMasterDocumentStatusStrategy" ref="textMasterDocumentStatusStrategy"/>
+        <property name="textMasterDocumentStatusReverseStrategy" ref="textMasterDocumentStatusReverseStrategy"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="textMasterDocumentService" ref="textMasterDocumentService"/>
+    </bean>
+
+    <bean id="defaultTextMasterDocumentRecoveryPerformable"
+          class="com.textmaster.core.cronjobs.TextMasterDocumentRecoveryPerformable"
+          parent="abstractJobPerformable">
+        <property name="textMasterProjectService" ref="textMasterProjectService"/>
+    </bean>
+
+    <bean id="defaultTextMasterGetSupportMessagesPerformable"
+          class="com.textmaster.core.cronjobs.TextMasterGetSupportMessagesPerformable"
+          parent="abstractJobPerformable">
+        <property name="textMasterDocumentService" ref="textMasterDocumentService"/>
+        <property name="textMasterMessageService" ref="textMasterMessageService"/>
+        <property name="textMasterSupportMessageReverseConverter" ref="textMasterSupportMessageReverseConverter"/>
+    </bean>
+
+    <!-- System Setup -->
+
+    <bean id="defaultTextMasterCoreSystemSetup" class="com.textmaster.core.setup.DefaultTextMasterCoreSystemSetup"
+          parent="abstractCoreSystemSetup"/>
+
+    <!-- Tasks -->
+
+    <alias name="defaultTextMasterProjectPushContentTaskRunner" alias="textMasterProjectPushContentTaskRunner"/>
+    <bean id="defaultTextMasterProjectPushContentTaskRunner"
+          class="com.textmaster.core.tasks.TextMasterProjectPushContentTaskRunner">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="textMasterProjectService" ref="textMasterProjectService"/>
+        <property name="taskService" ref="taskService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultTextMasterProjectFinalizeTaskRunner" alias="textMasterProjectFinalizeTaskRunner"/>
+    <bean id="defaultTextMasterProjectFinalizeTaskRunner"
+          class="com.textmaster.core.tasks.TextMasterProjectFinalizeTaskRunner">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="textMasterProjectService" ref="textMasterProjectService"/>
+        <property name="modelService" ref="modelService" />
+        <property name="taskService" ref="taskService" />
+        <property name="textMasterDocumentService" ref="textMasterDocumentService" />
+    </bean>
+
+    <alias name="defaultTextMasterProjectAutolaunchTaskRunner" alias="textMasterProjectAutolaunchTaskRunner"/>
+    <bean id="defaultTextMasterProjectAutolaunchTaskRunner"
+          class="com.textmaster.core.tasks.TextMasterProjectAutolaunchTaskRunner">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="textMasterProjectService" ref="textMasterProjectService"/>
+        <property name="modelService" ref="modelService" />
+        <property name="taskService" ref="taskService" />
+        <property name="textMasterProjectStatusReverseStrategy" ref="textMasterProjectStatusReverseStrategy" />
+    </bean>
+</beans>

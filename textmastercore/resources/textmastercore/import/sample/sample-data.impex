@@ -1,0 +1,119 @@
+$defaultCatalog = Default
+$catalogVersions = catalogVersions(catalog(id), version);
+$lang = fr
+$linkTarget = newWindow
+
+# Import languages mapping
+INSERT_UPDATE TextMasterLanguage; isocode[unique = true]; active[default = true]; language(isocode)
+                                ; fr-FR                 ;                       ; fr
+                                ; en-GB                 ;                       ; en
+                                ; es-ES                 ;                       ; es
+                                ; it-IT                 ;                       ; it
+                                ; de                    ;                       ; de
+
+
+# Import trigger for cronjobs
+INSERT_UPDATE Trigger; cronJob(code)[unique = true]        ; cronExpression  ; active; relative
+                     ; textMasterGetTranslationCronjob     ; 0 0/5 * 1/1 * ? * ; true  ; false
+                     ; textMasterDocumentRecoveryCronjob   ; 0 0/5 * 1/1 * ? * ; true  ; false
+                     ; textMasterGetSupportMessagesCronjob ; 0 0/5 * 1/1 * ? * ; true  ; false
+
+# Import some categories
+INSERT_UPDATE Category; code[unique = true]; catalogVersion(catalog(id), version); name[lang = $lang]; supercategories(code)
+                      ; teeshirts          ; $defaultCatalog:Staged              ; Teeshirts         ;
+                      ; longTeeShirts      ; $defaultCatalog:Staged              ; Long Teeshirts    ; teeshirts
+                      ; shortTeeShirts     ; $defaultCatalog:Staged              ; Short Teeshirts   ; teeshirts
+                      ; shorts             ; $defaultCatalog:Staged              ; Shorts            ;
+                      ; shortShorts        ; $defaultCatalog:Staged              ; Long Shorts       ; shorts
+                      ; longShorts         ; $defaultCatalog:Staged              ; Short Shorts      ; shorts
+                      ; jackets            ; $defaultCatalog:Staged              ; Jackets           ;
+                      ; longJackets        ; $defaultCatalog:Staged              ; Long Jackets      ; jackets
+                      ; shortJackets       ; $defaultCatalog:Staged              ; Short Jackets     ; jackets
+
+
+# Import some products
+INSERT_UPDATE Product; code[unique = true] ; catalogVersion(catalog(id), version); name[lang = $lang]    ; supercategories(code)
+                     ; teeshirtblue        ; $defaultCatalog:Staged              ; Teeshirt Blue         ; teeshirts
+                     ; teeshirtred         ; $defaultCatalog:Staged              ; Teeshirt Red          ; teeshirts
+                     ; teeshirtyellow      ; $defaultCatalog:Staged              ; Teeshirt Yellow       ; teeshirts
+                     ; teeshirtgreen       ; $defaultCatalog:Staged              ; Teeshirt Green        ; teeshirts
+                     ; teeshirtblack       ; $defaultCatalog:Staged              ; Teeshirt Black        ; teeshirts
+                     ; teeshirtindianared  ; $defaultCatalog:Staged              ; Teeshirt Indiana Red  ; teeshirts
+                     ; teeshirtlightcoral  ; $defaultCatalog:Staged              ; Teeshirt Light Coral  ; teeshirts
+                     ; teeshirtsalmon      ; $defaultCatalog:Staged              ; Teeshirt Salmon       ; teeshirts
+                     ; teeshirtcrimson     ; $defaultCatalog:Staged              ; Teeshirt Crimson      ; teeshirts
+                     ; teeshirtlightblue   ; $defaultCatalog:Staged              ; Teeshirt Light Blue   ; teeshirts
+                     ; teeshirtdarkblue    ; $defaultCatalog:Staged              ; Teeshirt Dark Blue    ; teeshirts
+                     ; teeshirtlightgreen  ; $defaultCatalog:Staged              ; Teeshirt Light Green  ; teeshirts
+                     ; teeshirtdarkgreen   ; $defaultCatalog:Staged              ; Teeshirt Dark Green   ; teeshirts
+                     ; teeshirtlightblack  ; $defaultCatalog:Staged              ; Teeshirt Light Black  ; teeshirts
+                     ; teeshirtdarkblack   ; $defaultCatalog:Staged              ; Teeshirt Dark Black   ; teeshirts
+                     ; teeshirtlightred    ; $defaultCatalog:Staged              ; Teeshirt Light Red    ; teeshirts
+                     ; teeshirtdarkred     ; $defaultCatalog:Staged              ; Teeshirt Dark Red     ; teeshirts
+                     ; teeshirtlightyellow ; $defaultCatalog:Staged              ; Teeshirt Light Yellow ; teeshirts
+                     ; teeshirtdarkyellow  ; $defaultCatalog:Staged              ; Teeshirt Dark Yellow  ; teeshirts
+
+                     ; shortblue           ; $defaultCatalog:Staged              ; Short Blue            ; shorts
+                     ; shortred            ; $defaultCatalog:Staged              ; Short Red             ; shorts
+                     ; shortyellow         ; $defaultCatalog:Staged              ; Short Yellow          ; shorts
+                     ; shortgreen          ; $defaultCatalog:Staged              ; Short Green           ; shorts
+                     ; shortblack          ; $defaultCatalog:Staged              ; Short Black           ; shorts
+                     ; shortindianared     ; $defaultCatalog:Staged              ; Short Indiana Red     ; shorts
+                     ; shortlightcoral     ; $defaultCatalog:Staged              ; Short Light Coral     ; shorts
+                     ; shortsalmon         ; $defaultCatalog:Staged              ; Short Salmon          ; shorts
+                     ; shortcrimson        ; $defaultCatalog:Staged              ; Short Crimson         ; shorts
+                     ; shortlightblue      ; $defaultCatalog:Staged              ; Short Light Blue      ; shorts
+                     ; shortdarkblue       ; $defaultCatalog:Staged              ; Short Dark Blue       ; shorts
+                     ; shortlightgreen     ; $defaultCatalog:Staged              ; Short Light Green     ; shorts
+                     ; shortdarkgreen      ; $defaultCatalog:Staged              ; Short Dark Green      ; shorts
+                     ; shortlightblack     ; $defaultCatalog:Staged              ; Short Light Black     ; shorts
+                     ; shortdarkblack      ; $defaultCatalog:Staged              ; Short Dark Black      ; shorts
+                     ; shortlightred       ; $defaultCatalog:Staged              ; Short Light Red       ; shorts
+                     ; shortdarkred        ; $defaultCatalog:Staged              ; Short Dark Red        ; shorts
+                     ; shortlightyellow    ; $defaultCatalog:Staged              ; Short Light Yellow    ; shorts
+                     ; shortdarkyellow     ; $defaultCatalog:Staged              ; Short Dark Yellow     ; shorts
+
+                     ; jacketblue          ; $defaultCatalog:Staged              ; Jacket Blue           ; jackets
+                     ; jacketred           ; $defaultCatalog:Staged              ; Jacket Red            ; jackets
+                     ; jacketyellow        ; $defaultCatalog:Staged              ; Jacket Yellow         ; jackets
+                     ; jacketgreen         ; $defaultCatalog:Staged              ; Jacket Green          ; jackets
+                     ; jacketblack         ; $defaultCatalog:Staged              ; Jacket Black          ; jackets
+                     ; jacketindianared    ; $defaultCatalog:Staged              ; Jacket Indiana Red    ; jackets
+                     ; jacketlightcoral    ; $defaultCatalog:Staged              ; Jacket Light Coral    ; jackets
+                     ; jacketsalmon        ; $defaultCatalog:Staged              ; Jacket Salmon         ; jackets
+                     ; jacketcrimson       ; $defaultCatalog:Staged              ; Jacket Crimson        ; jackets
+                     ; jacketlightblue     ; $defaultCatalog:Staged              ; Jacket Light Blue     ; jackets
+                     ; jacketdarkblue      ; $defaultCatalog:Staged              ; Jacket Dark Blue      ; jackets
+                     ; jacketlightgreen    ; $defaultCatalog:Staged              ; Jacket Light Green    ; jackets
+                     ; jacketdarkgreen     ; $defaultCatalog:Staged              ; Jacket Dark Green     ; jackets
+                     ; jacketlightblack    ; $defaultCatalog:Staged              ; Jacket Light Black    ; jackets
+                     ; jacketdarkblack     ; $defaultCatalog:Staged              ; Jacket Dark Black     ; jackets
+                     ; jacketlightred      ; $defaultCatalog:Staged              ; Jacket Light Red      ; jackets
+                     ; jacketdarkred       ; $defaultCatalog:Staged              ; Jacket Dark Red       ; jackets
+                     ; jacketlightyellow   ; $defaultCatalog:Staged              ; Jacket Light Yellow   ; jackets
+                     ; jacketdarkyellow    ; $defaultCatalog:Staged              ; Jacket Dark Yellow    ; jackets
+
+
+# Import some CMS components
+INSERT_UPDATE CMSLinkComponent; uid[unique = true]; catalogVersion(catalog(id), version); name            ; linkName             ; external[default = true]; target(code)[default = $linkTarget]; url
+                              ; googleLink        ; $defaultCatalog:Staged              ; Google Link     ; Se rendre sur Google ;                         ;                                    ; https://www.google.fr
+                              ; amazonLink        ; $defaultCatalog:Staged              ; Amazon Link     ; Se rendre sur Google ;                         ;                                    ; https://www.amazon.fr
+                              ; textMasterLink    ; $defaultCatalog:Staged              ; TextMaster Link ; Se rendre sur Google ;                         ;                                    ; https://www.textmaster.com/
+
+INSERT_UPDATE CMSParagraphComponent; uid[unique = true]   ; catalogVersion(catalog(id), version); name                    ; content[lang = $lang]
+                                   ; homePageLeftBar      ; $defaultCatalog:Staged              ; Home Page Left Bar      ; Coucou le monde
+                                   ; homePageRightBar     ; $defaultCatalog:Staged              ; Home Page Right Bar     ; Coucou le monde
+                                   ; homePageHeader       ; $defaultCatalog:Staged              ; Home Page Header        ; Coucou le monde
+                                   ; homePageFooter       ; $defaultCatalog:Staged              ; Home Page Footer        ; Coucou le monde
+                                   ; productPageLeftBar   ; $defaultCatalog:Staged              ; Product Page Left Bar   ; Coucou le monde
+                                   ; productPageRightBar  ; $defaultCatalog:Staged              ; Product Page Right Bar  ; Coucou le monde
+                                   ; productPageHeader    ; $defaultCatalog:Staged              ; Product Page Header     ; Coucou le monde
+                                   ; productPageFooter    ; $defaultCatalog:Staged              ; Product Page Footer     ; Coucou le monde
+                                   ; categoryPageLeftBar  ; $defaultCatalog:Staged              ; Category Page Left Bar  ; Coucou le monde
+                                   ; categoryPageRightBar ; $defaultCatalog:Staged              ; Category Page Right Bar ; Coucou le monde
+                                   ; categoryPageHeader   ; $defaultCatalog:Staged              ; Category Page Header    ; Coucou le monde
+                                   ; categoryPageFooter   ; $defaultCatalog:Staged              ; Category Page Footer    ; Coucou le monde
+                                   ; cartPageLeftBar      ; $defaultCatalog:Staged              ; Cart Page Left Bar      ; Coucou le monde
+                                   ; cartPageRightBar     ; $defaultCatalog:Staged              ; Cart Page Right Bar     ; Coucou le monde
+                                   ; cartPageHeader       ; $defaultCatalog:Staged              ; Cart Page Header        ; Coucou le monde
+                                   ; cartPageFooter       ; $defaultCatalog:Staged              ; Cart Page Footer        ; Coucou le monde

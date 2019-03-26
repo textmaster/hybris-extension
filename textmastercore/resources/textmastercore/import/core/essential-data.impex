@@ -1,0 +1,8 @@
+$defaultLanguage = en
+$sessionLanguage = sessionLanguage(isocode[default = $defaultLanguage])
+
+# Cronjob
+INSERT_UPDATE CronJob; code[unique = true]                 ; job(code)                                      ; $sessionLanguage; active[default = true]
+                     ; textMasterGetTranslationCronjob     ; defaultTextMasterGetTranslationsPerformable    ;                 ;
+                     ; textMasterDocumentRecoveryCronjob   ; defaultTextMasterDocumentRecoveryPerformable   ;                 ;
+                     ; textMasterGetSupportMessagesCronjob ; defaultTextMasterGetSupportMessagesPerformable ;                 ;
