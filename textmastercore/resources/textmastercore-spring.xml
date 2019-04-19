@@ -141,6 +141,18 @@
         <property name="typeCode" value="TextMasterAccount"/>
     </bean>
 
+    <alias name="defaultTextMasterAccountInitDefaultsInterceptor" alias="textMasterAccountInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterAccountInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterAccountInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterAccountCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterAccountInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterAccountInitDefaultsInterceptor"/>
+        <property name="typeCode" value="TextMasterAccount"/>
+    </bean>
+
     <alias name="defaultTextMasterProjectPrepareInterceptor" alias="textMasterProjectPrepareInterceptor"/>
     <bean id="defaultTextMasterProjectPrepareInterceptor"
           class="com.textmaster.core.interceptors.TextMasterProjectPrepareInterceptor">
@@ -150,6 +162,18 @@
     <bean id="textMasterProjectPrepareInterceptorMapping"
           class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="textMasterProjectPrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterProject"/>
+    </bean>
+
+    <alias name="defaultTextMasterProjectInitDefaultsInterceptor" alias="textMasterProjectInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterProjectInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterProjectInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterProjectCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterProjectInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterProjectInitDefaultsInterceptor"/>
         <property name="typeCode" value="TextMasterProject"/>
     </bean>
 
@@ -165,6 +189,18 @@
         <property name="typeCode" value="TextMasterDocument"/>
     </bean>
 
+    <alias name="defaultTextMasterDocumentInitDefaultsInterceptor" alias="textMasterDocumentInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterDocumentInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterDocumentInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterDocumentCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterDocumentInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterDocumentInitDefaultsInterceptor"/>
+        <property name="typeCode" value="TextMasterDocument"/>
+    </bean>
+
     <alias name="defaultTextMasterDocumentAttributePrepareInterceptor"
            alias="textMasterDocumentAttributePrepareInterceptor"/>
     <bean id="defaultTextMasterDocumentAttributePrepareInterceptor"
@@ -175,6 +211,19 @@
     <bean id="textMasterDocumentAttributePrepareInterceptorMapping"
           class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="textMasterDocumentAttributePrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterDocumentAttribute"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentAttributeInitDefaultsInterceptor"
+           alias="textMasterDocumentAttributeInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterDocumentAttributeInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterDocumentAttributeInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterDocumentAttributeCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterDocumentAttributeInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterDocumentAttributeInitDefaultsInterceptor"/>
         <property name="typeCode" value="TextMasterDocumentAttribute"/>
     </bean>
 

@@ -5,6 +5,7 @@ import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
 import de.hybris.platform.servicelayer.interceptor.PrepareInterceptor;
 import de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator;
+import org.apache.solr.common.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 
@@ -15,8 +16,7 @@ public class TextMasterSupportMessagePrepareInterceptor implements PrepareInterc
 	@Override
 	public void onPrepare(TextMasterSupportMessageModel model, InterceptorContext context) throws InterceptorException
 	{
-		// Define auto generated code for new item
-		if (context.isNew(model))
+		if (StringUtils.isEmpty(model.getCode()))
 		{
 			model.setCode((String) getCodeGenerator().generate());
 		}

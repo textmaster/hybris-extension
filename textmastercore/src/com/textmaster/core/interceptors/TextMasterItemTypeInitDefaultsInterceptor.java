@@ -1,25 +1,21 @@
 package com.textmaster.core.interceptors;
 
-import com.textmaster.core.model.TextMasterConfigurationModel;
+import com.textmaster.core.model.TextMasterItemTypeModel;
+import de.hybris.platform.servicelayer.interceptor.InitDefaultsInterceptor;
 import de.hybris.platform.servicelayer.interceptor.InterceptorContext;
 import de.hybris.platform.servicelayer.interceptor.InterceptorException;
-import de.hybris.platform.servicelayer.interceptor.PrepareInterceptor;
 import de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator;
-import org.apache.solr.common.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 
-public class TextMasterConfigurationPrepareInterceptor implements PrepareInterceptor<TextMasterConfigurationModel>
+public class TextMasterItemTypeInitDefaultsInterceptor implements InitDefaultsInterceptor<TextMasterItemTypeModel>
 {
 	private PersistentKeyGenerator codeGenerator;
 
 	@Override
-	public void onPrepare(final TextMasterConfigurationModel model, final InterceptorContext context) throws InterceptorException
+	public void onInitDefaults(final TextMasterItemTypeModel model, final InterceptorContext context) throws InterceptorException
 	{
-		if (StringUtils.isEmpty(model.getCode()))
-		{
-			model.setCode((String) getCodeGenerator().generate());
-		}
+		model.setCode((String) getCodeGenerator().generate());
 	}
 
 	protected PersistentKeyGenerator getCodeGenerator()
