@@ -7,8 +7,7 @@
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
 
-    <widget-extension widgetId="backofficeMainSlot">
-
+    <widget-extension widgetId="mainSlot">
         <widget id="textmaster-widget-accounts-loader"
                 widgetDefinitionId="com.textmaster.widgets.loader.accounts"
                 slotId="cockpitWidgetChildrenInvisible" template="false">
@@ -17,6 +16,25 @@
             <setting key="widgetStyleAttribute" type="String"></setting>
             <virtual-sockets/>
         </widget>
+        <widget id="textmaster-widget-dashboard-projects-loader"
+                widgetDefinitionId="com.textmaster.widgets.loader.projects"
+                slotId="cockpitWidgetChildrenInvisible" template="false">
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <virtual-sockets/>
+        </widget>
+        <widget id="textmaster-widget-dashboard-documents-loader"
+                widgetDefinitionId="com.textmaster.widgets.loader.documents"
+                slotId="cockpitWidgetChildrenInvisible" template="false">
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <virtual-sockets/>
+        </widget>
+    </widget-extension>
+
+    <widget-extension widgetId="backofficeMainSlot">
 
         <!-- Project creation -->
 
@@ -107,6 +125,7 @@
                 <setting key="widgetStyleClass" type="String"></setting>
                 <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
                 <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="socketDataType_$T" type="String">com.textmaster.core.model.TextMasterAccountModel</setting>
                 <virtual-sockets/>
             </widget>
 
@@ -169,14 +188,6 @@
 
                     <widget id="textmaster-widget-dashboard-projects" widgetDefinitionId="com.textmaster.backoffice.widgets.projects.collectionbrowser"
                             title="Projects List" slotId="center" template="false">
-                        <widget id="textmaster-widget-dashboard-projects-loader"
-                                widgetDefinitionId="com.textmaster.widgets.loader.projects"
-                                slotId="cockpitWidgetChildrenInvisible" template="false">
-                            <setting key="widgetStyleClass" type="String"></setting>
-                            <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
-                            <setting key="widgetStyleAttribute" type="String"></setting>
-                            <virtual-sockets/>
-                        </widget>
                         <setting key="itemRenderer" type="String">listViewRenderer</setting>
                         <setting key="sortableListHeader" type="Boolean">true</setting>
                         <setting key="asyncLoading" type="Boolean">true</setting>
@@ -195,14 +206,6 @@
                     </widget>
                     <widget id="textmaster-widget-dashboard-documents" widgetDefinitionId="com.hybris.cockpitng.collectionBrowser"
                             title="Documents List" slotId="bottom" template="false">
-                        <widget id="textmaster-widget-dashboard-documents-loader"
-                                widgetDefinitionId="com.textmaster.widgets.loader.documents"
-                                slotId="cockpitWidgetChildrenInvisible" template="false">
-                            <setting key="widgetStyleClass" type="String"></setting>
-                            <setting key="__externalLocationPath" type="String">extension://textmasterbackoffice</setting>
-                            <setting key="widgetStyleAttribute" type="String"></setting>
-                            <virtual-sockets/>
-                        </widget>
                         <setting key="itemRenderer" type="String">listViewRenderer</setting>
                         <setting key="sortableListHeader" type="Boolean">true</setting>
                         <setting key="asyncLoading" type="Boolean">true</setting>

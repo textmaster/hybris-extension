@@ -1,19 +1,21 @@
 package com.textmaster.backoffice.widgets;
 
 import com.hybris.backoffice.navigation.impl.SimpleNode;
+import com.hybris.backoffice.widgets.notificationarea.NotificationService;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
-import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
 import com.hybris.cockpitng.annotations.SocketEvent;
 import com.hybris.cockpitng.annotations.ViewEvent;
 import com.hybris.cockpitng.util.DefaultWidgetController;
 import com.textmaster.backoffice.constants.TextmasterbackofficeConstants;
 import com.textmaster.core.constants.TextmastercoreConstants;
 import com.textmaster.core.dtos.TextMasterApiTemplateDto;
-import com.textmaster.core.model.*;
+import com.textmaster.core.model.TextMasterAccountModel;
+import com.textmaster.core.model.TextMasterLanguageModel;
+import com.textmaster.core.model.TextMasterProjectModel;
+import com.textmaster.core.model.TextMasterProjectTaskModel;
 import com.textmaster.core.services.TextMasterLanguageService;
 import com.textmaster.core.services.TextMasterProjectService;
 import de.hybris.platform.core.model.ItemModel;
-import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.type.AttributeDescriptorModel;
 import de.hybris.platform.core.model.type.ComposedTypeModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -23,7 +25,6 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.task.TaskService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Component;
@@ -84,6 +85,9 @@ public class TextMasterSummaryController extends DefaultWidgetController
 	@WireVariable
 	private TextMasterLanguageService textMasterLanguageService;
 
+	@WireVariable
+	private NotificationService notificationService;
+
 	@Override
 	public void initialize(final Component comp)
 	{
@@ -109,6 +113,12 @@ public class TextMasterSummaryController extends DefaultWidgetController
 	@SocketEvent(socketId = "items")
 	public void storeItems(final List<ItemModel> itemsSelected)
 	{
+		// If no items selected, it could be the case of first document list loading.
+		// In all cases, do nothing.
+		if (CollectionUtils.isEmpty(itemsSelected)) {
+			return;
+		}
+
 		Integer maxItems = configurationService.getConfiguration().getInt(TextmastercoreConstants.Documents.SELECTION_MAX);
 
 		// Get locale source to send correct content
@@ -128,28 +138,25 @@ public class TextMasterSummaryController extends DefaultWidgetController
 
 		if (maxItems > 0 && itemsSelected.size() > maxItems)
 		{
-			NotificationUtils.notifyUser(getLabel("documentsmaxreached", new Object[] { String.valueOf(maxItems) }),
-					NotificationEvent.Type.WARNING);
+			getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.WARNING, getLabel("documentsmaxreached", new Object[] { String.valueOf(maxItems) }));
 			return;
 		}
 
 		// Prevent added empty documents
 		if (itemsToAdd.size() == 0)
 		{
-			NotificationUtils.notifyUser(getLabel("documentsallempty"), NotificationEvent.Type.FAILURE);
+			getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.FAILURE, getLabel("documentsallempty"));
 			return;
 		}
 
 		// Display notification to user
-		NotificationUtils.notifyUser(getLabel("documentsaddedtoproject", new Object[] { String.valueOf(itemsToAdd.size()) }),
-				NotificationEvent.Type.SUCCESS);
+		LOG.info("Success Message: {}", getLabel("documentsaddedtoproject", new Object[] { String.valueOf(itemsToAdd.size()) }));
+		getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.SUCCESS, getLabel("documentsaddedtoproject", new Object[] { String.valueOf(itemsToAdd.size()) }));
 
 		int numberOfDocumentsNotAdded = itemsSelected.size() - itemsToAdd.size();
 		if (numberOfDocumentsNotAdded > 0)
 		{
-			NotificationUtils
-					.notifyUser(getLabel("documentsnotaddedtoproject", new Object[] { String.valueOf(numberOfDocumentsNotAdded) }),
-							NotificationEvent.Type.INFO);
+			getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.INFO, getLabel("documentsnotaddedtoproject", new Object[] { String.valueOf(numberOfDocumentsNotAdded) }));
 		}
 
 		// Store data
@@ -227,12 +234,12 @@ public class TextMasterSummaryController extends DefaultWidgetController
 			catch (Exception e)
 			{
 				LOG.error("Impossible to create project: " + e.getMessage(), e);
-				NotificationUtils.notifyUser(getLabel("projectnotcreated"), NotificationEvent.Type.WARNING);
+				getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.WARNING, getLabel("projectnotcreated"));
 			}
 		}
 
 		// Display confirmation message
-		NotificationUtils.notifyUser(getLabel("projectcreated"), NotificationEvent.Type.SUCCESS);
+		getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.SUCCESS, getLabel("projectcreated"));
 
 		// Reset other components
 		getModelService().refresh(account);
@@ -284,53 +291,33 @@ public class TextMasterSummaryController extends DefaultWidgetController
 		this.textMasterProjectService = textMasterProjectService;
 	}
 
-	public ConfigurationService getConfigurationService()
+	protected ConfigurationService getConfigurationService()
 	{
 		return configurationService;
 	}
 
-	public void setConfigurationService(ConfigurationService configurationService)
-	{
-		this.configurationService = configurationService;
-	}
-
-	public I18NService getI18NService()
+	protected I18NService getI18NService()
 	{
 		return i18NService;
 	}
 
-	public void setI18NService(I18NService i18NService)
-	{
-		this.i18NService = i18NService;
-	}
-
-	public ModelService getModelService()
+	protected ModelService getModelService()
 	{
 		return modelService;
 	}
 
-	public void setModelService(ModelService modelService)
-	{
-		this.modelService = modelService;
-	}
-
-	public TaskService getTaskService()
+	protected TaskService getTaskService()
 	{
 		return taskService;
 	}
 
-	public void setTaskService(TaskService taskService)
-	{
-		this.taskService = taskService;
-	}
-
-	public CommonI18NService getCommonI18NService()
+	protected CommonI18NService getCommonI18NService()
 	{
 		return commonI18NService;
 	}
 
-	public void setCommonI18NService(CommonI18NService commonI18NService)
+	protected NotificationService getNotificationService()
 	{
-		this.commonI18NService = commonI18NService;
+		return notificationService;
 	}
 }

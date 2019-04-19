@@ -1,7 +1,7 @@
 package com.textmaster.backoffice.widgets.actions.create;
 
+import com.hybris.backoffice.widgets.notificationarea.NotificationService;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
-import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
@@ -33,6 +33,9 @@ public class ValidateDocumentsAction extends AbstractComponentWidgetAdapterAware
 
 	@Resource
 	private ModelService modelService;
+
+	@Resource
+	private NotificationService notificationService;
 
 	/**
 	 * {@inheritDoc}
@@ -67,7 +70,7 @@ public class ValidateDocumentsAction extends AbstractComponentWidgetAdapterAware
 			{
 				getTextMasterDocumentService().completeDocuments(project, documents);
 
-				NotificationUtils.notifyUser(ctx.getLabel("documents.validated"), NotificationEvent.Type.SUCCESS);
+				getNotificationService().notifyUser("ValidateDocumentsAction", "TextMasterGeneral", NotificationEvent.Level.SUCCESS, ctx.getLabel("documents.validated"));
 
 				// Change all documents statuses to COMPLETED
 				documents = documents
@@ -97,7 +100,7 @@ public class ValidateDocumentsAction extends AbstractComponentWidgetAdapterAware
 			{
 				LOG.error("Impossible to complete documents: {}", e.getMessage());
 
-				NotificationUtils.notifyUser(ctx.getLabel("documents.notvalidated"), NotificationEvent.Type.FAILURE);
+				getNotificationService().notifyUser("ValidateDocumentsAction", "TextMasterGeneral", NotificationEvent.Level.FAILURE, ctx.getLabel("documents.notvalidated"));
 
 				result = new ActionResult("error");
 			}
@@ -141,5 +144,10 @@ public class ValidateDocumentsAction extends AbstractComponentWidgetAdapterAware
 	protected ModelService getModelService()
 	{
 		return modelService;
+	}
+
+	protected NotificationService getNotificationService()
+	{
+		return notificationService;
 	}
 }

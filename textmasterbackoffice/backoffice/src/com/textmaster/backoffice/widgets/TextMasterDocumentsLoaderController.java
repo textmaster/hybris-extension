@@ -24,6 +24,10 @@ public class TextMasterDocumentsLoaderController extends DefaultWidgetController
 	@SocketEvent(socketId = "project")
 	public void project(final TextMasterProjectModel project)
 	{
+		if (project == null) {
+			LOG.error("Impossible to load documents to project: no project provided in widget socket parameters");
+			return;
+		}
 		sendOutput("documents", project.getDocuments());
 	}
 }

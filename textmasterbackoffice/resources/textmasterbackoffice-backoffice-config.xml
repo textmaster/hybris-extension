@@ -259,4 +259,45 @@
             </y:labels>
         </y:base>
     </context>
+
+    <context component="notification-area" module="platformbackoffice">
+        <na:notification-area xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms"
+                              xmlns:sv="http://www.hybris.com/cockpitng/component/summaryview"
+                              xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+                              xmlns:lv="http://www.hybris.com/cockpitng/component/listView"
+                              xmlns:vc="http://www.hybris.com/cockpitng/component/valuechooser"
+                              xmlns:na="http://www.hybris.com/cockpitng/config/notifications"
+                              xmlns:ysl="http://www.hybris.com/cockpitng/config/simplelist"
+                              xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+                              xmlns:dnd="http://www.hybris.com/cockpitng/component/dragAndDrop"
+                              xmlns:ql="http://www.hybris.com/cockpitng/component/quick-list"
+                              xmlns:ea="http://www.hybris.com/cockpitng/component/editorArea"
+                              xmlns:ful="http://www.hybris.com/cockpitng/config/fulltextsearch"
+                              xmlns:cb="http://www.hybris.com/cockpitng/config/collectionbrowser">
+            <na:notifications eventType="TextMasterGeneral" level="FAILURE">
+                <na:message>user.notification.textmaster.general</na:message>
+                <na:references>
+                    <na:reference label="#root" placeholder="0"/>
+                </na:references>
+            </na:notifications>
+            <na:notifications eventType="TextMasterGeneral" level="SUCCESS">
+                <na:message>user.notification.textmaster.general</na:message>
+                <na:references>
+                    <na:reference label="#root" placeholder="0"/>
+                </na:references>
+            </na:notifications>
+            <na:notifications eventType="TextMasterGeneral" level="WARNING">
+                <na:message>user.notification.textmaster.general</na:message>
+                <na:references>
+                    <na:reference label="#root" placeholder="0"/>
+                </na:references>
+            </na:notifications>
+            <na:notifications eventType="TextMasterGeneral" level="INFO">
+                <na:message>user.notification.textmaster.general</na:message>
+                <na:references>
+                    <na:reference label="#root" placeholder="0"/>
+                </na:references>
+            </na:notifications>
+        </na:notification-area>
+    </context>
 </config>

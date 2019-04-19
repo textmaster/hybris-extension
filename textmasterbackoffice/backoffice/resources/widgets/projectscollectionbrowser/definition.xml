@@ -11,7 +11,13 @@
         <input id="previousItemSelectorInvocation" type="[T]" />
         <input id="nextItemSelectorInvocation" type="[T]" />
         <input id="reset" type="java.util.Map"/>
+        <input id="selectItem" type="[T]"/>
+        <input id="deselectItems" type="[T]" multiplicity="List" />
+        <input id="selectionContext" type="java.util.Map" />
+        <input id="deselectAllItems" type="java.lang.Object" />
+        <input id="focusItem" type="[T]" />
         <output id="selectedItem" type="[T]" />
+        <output id="focusedItem" type="[T]" />
         <output id="selectedItems" type="[T]" multiplicity="List"/>
         <output id="sortData" type="com.hybris.cockpitng.search.data.SortData" />
         <output id="previousItemSelectorContext" type="com.hybris.cockpitng.widgets.navigation.NavigationItemSelectorContext"/>

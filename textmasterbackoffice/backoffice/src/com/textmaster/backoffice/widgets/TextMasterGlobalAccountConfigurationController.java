@@ -1,26 +1,7 @@
 package com.textmaster.backoffice.widgets;
 
+import com.hybris.backoffice.widgets.notificationarea.NotificationService;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
-import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
-import com.textmaster.core.services.*;
-import de.hybris.platform.core.model.c2l.LanguageModel;
-import de.hybris.platform.core.model.type.AttributeDescriptorModel;
-import de.hybris.platform.core.model.type.ComposedTypeModel;
-import de.hybris.platform.servicelayer.type.TypeService;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.*;
-
 import com.hybris.cockpitng.annotations.SocketEvent;
 import com.hybris.cockpitng.annotations.ViewEvent;
 import com.hybris.cockpitng.dataaccess.facades.type.TypeFacade;
@@ -29,6 +10,22 @@ import com.textmaster.backoffice.components.ComposedTypeTreeNode;
 import com.textmaster.core.model.TextMasterAccountModel;
 import com.textmaster.core.model.TextMasterConfigurationModel;
 import com.textmaster.core.model.TextMasterItemTypeModel;
+import com.textmaster.core.services.*;
+import de.hybris.platform.core.model.c2l.LanguageModel;
+import de.hybris.platform.core.model.type.AttributeDescriptorModel;
+import de.hybris.platform.core.model.type.ComposedTypeModel;
+import de.hybris.platform.servicelayer.type.TypeService;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.*;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class TextMasterGlobalAccountConfigurationController extends DefaultWidgetController
@@ -48,18 +45,27 @@ public class TextMasterGlobalAccountConfigurationController extends DefaultWidge
 	// Spring Injection
 	@WireVariable
 	private TypeService typeService;
+
 	@WireVariable
 	private TextMasterAccountService textMasterAccountService;
+
 	@WireVariable
 	private TextMasterConfigurationService textMasterConfigurationService;
+
 	@WireVariable
 	private TextMasterProjectService textMasterProjectService;
+
 	@WireVariable
 	private TypeFacade typeFacade;
+
 	@WireVariable
 	private TextMasterCommerceCommonI18NService commerceCommonI18NService;
+
 	@WireVariable
 	private TextMasterDocumentService textMasterDocumentService;
+
+	@WireVariable
+	private NotificationService notificationService;
 
 	private DefaultTreeModel<ComposedTypeModel> typesTreeModel;
 	private TextMasterAccountModel textmasterAccount;
@@ -405,12 +411,13 @@ public class TextMasterGlobalAccountConfigurationController extends DefaultWidge
 					.save(textmasterAccount, sourceLanguageIsoCode, targetLanguageIsoCode, selectedAttributeMap);
 
 			// Display confirmation message
-			NotificationUtils.notifyUser(getLabel("configurationsavedsuccess"), NotificationEvent.Type.SUCCESS);
+			getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.SUCCESS, getLabel("configurationsavedsuccess"));
+
 		}
 		catch (Exception e)
 		{
 			// Display confirmation message
-			NotificationUtils.notifyUser(getLabel("configurationsavederror"), NotificationEvent.Type.FAILURE);
+			getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.FAILURE, getLabel("configurationsavederror"));
 		}
 
 	}
@@ -420,21 +427,9 @@ public class TextMasterGlobalAccountConfigurationController extends DefaultWidge
 		return typeService;
 	}
 
-	@Required
-	public void setTypeService(TypeService typeService)
-	{
-		this.typeService = typeService;
-	}
-
 	protected TextMasterAccountService getTextMasterAccountService()
 	{
 		return textMasterAccountService;
-	}
-
-	@Required
-	public void setTextMasterAccountService(TextMasterAccountService textMasterAccountService)
-	{
-		this.textMasterAccountService = textMasterAccountService;
 	}
 
 	protected TextMasterConfigurationService getTextMasterConfigurationService()
@@ -442,21 +437,9 @@ public class TextMasterGlobalAccountConfigurationController extends DefaultWidge
 		return textMasterConfigurationService;
 	}
 
-	@Required
-	public void setTextMasterConfigurationService(TextMasterConfigurationService textMasterConfigurationService)
-	{
-		this.textMasterConfigurationService = textMasterConfigurationService;
-	}
-
 	protected TextMasterProjectService getTextMasterProjectService()
 	{
 		return textMasterProjectService;
-	}
-
-	@Required
-	public void setTextMasterProjectService(TextMasterProjectService textMasterProjectService)
-	{
-		this.textMasterProjectService = textMasterProjectService;
 	}
 
 	protected TypeFacade getTypeFacade()
@@ -464,20 +447,13 @@ public class TextMasterGlobalAccountConfigurationController extends DefaultWidge
 		return typeFacade;
 	}
 
-	@Required
-	public void setTypeFacade(TypeFacade typeFacade)
-	{
-		this.typeFacade = typeFacade;
-	}
-
 	protected TextMasterCommerceCommonI18NService getCommerceCommonI18NService()
 	{
 		return commerceCommonI18NService;
 	}
 
-	@Required
-	public void setCommerceCommonI18NService(TextMasterCommerceCommonI18NService commerceCommonI18NService)
+	protected NotificationService getNotificationService()
 	{
-		this.commerceCommonI18NService = commerceCommonI18NService;
+		return notificationService;
 	}
 }

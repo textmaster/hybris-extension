@@ -11,15 +11,14 @@
  */
 package com.textmaster.backoffice.widgets;
 
+import com.hybris.backoffice.widgets.notificationarea.NotificationService;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
-import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
 import com.hybris.cockpitng.annotations.SocketEvent;
 import com.hybris.cockpitng.annotations.ViewEvent;
 import com.hybris.cockpitng.util.DefaultWidgetController;
 import com.textmaster.backoffice.components.ComposedTypeTreeNode;
 import com.textmaster.backoffice.constants.TextmasterbackofficeConstants;
 import com.textmaster.backoffice.exceptions.ValidationException;
-import com.textmaster.core.constants.TextmastercoreConstants;
 import com.textmaster.core.dtos.TextMasterApiTemplateDto;
 import com.textmaster.core.model.TextMasterAccountModel;
 import com.textmaster.core.model.TextMasterLanguageModel;
@@ -82,6 +81,9 @@ public class TextMasterProjectController extends DefaultWidgetController
 
 	@WireVariable
 	private TextMasterConfigurationService textMasterConfigurationService;
+
+	@WireVariable
+	private NotificationService notificationService;
 
 	// Local storage
 	private TextMasterAccountModel account;
@@ -507,9 +509,10 @@ public class TextMasterProjectController extends DefaultWidgetController
 		{
 			ve.getErrors()
 					.stream()
-					.forEach(e -> NotificationUtils.notifyUser(e, NotificationEvent.Type.FAILURE));
+					.forEach(e -> getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.FAILURE, e));
 			return;
 		}
+
 
 		final TreeNode<ComposedTypeModel> selectedNode = ((DefaultTreeModel<ComposedTypeModel>) typesTreeModel).getSelection()
 				.stream().findFirst().get();
@@ -611,5 +614,10 @@ public class TextMasterProjectController extends DefaultWidgetController
 				}
 			});
 		}
+	}
+
+	protected NotificationService getNotificationService()
+	{
+		return notificationService;
 	}
 }

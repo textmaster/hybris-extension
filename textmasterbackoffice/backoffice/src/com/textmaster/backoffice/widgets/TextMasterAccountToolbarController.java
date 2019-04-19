@@ -1,12 +1,16 @@
 package com.textmaster.backoffice.widgets;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
+import com.hybris.backoffice.widgets.notificationarea.NotificationService;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
-import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
-import org.jgroups.util.MessageBatch;
+import com.hybris.cockpitng.actions.create.CreateContext;
+import com.hybris.cockpitng.annotations.SocketEvent;
+import com.hybris.cockpitng.annotations.ViewEvent;
+import com.hybris.cockpitng.dataaccess.facades.type.TypeFacade;
+import com.hybris.cockpitng.util.DefaultWidgetController;
+import com.textmaster.core.model.TextMasterAccountModel;
+import com.textmaster.core.model.TextMasterProjectModel;
+import com.textmaster.core.services.TextMasterAccountService;
+import com.textmaster.core.services.TextMasterProjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Component;
@@ -18,20 +22,11 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
-
-import com.hybris.backoffice.widgets.advancedsearch.impl.AdvancedSearchData;
-import com.hybris.cockpitng.actions.create.CreateContext;
-import com.hybris.cockpitng.annotations.SocketEvent;
-import com.hybris.cockpitng.annotations.ViewEvent;
-import com.hybris.cockpitng.core.config.impl.jaxb.hybris.advancedsearch.FieldType;
-import com.hybris.cockpitng.dataaccess.facades.type.TypeFacade;
-import com.hybris.cockpitng.search.data.ValueComparisonOperator;
-import com.hybris.cockpitng.util.DefaultWidgetController;
-import com.textmaster.core.model.TextMasterAccountModel;
-import com.textmaster.core.model.TextMasterProjectModel;
-import com.textmaster.core.services.TextMasterAccountService;
-import com.textmaster.core.services.TextMasterProjectService;
 import org.zkoss.zul.Messagebox;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 
 public class TextMasterAccountToolbarController extends DefaultWidgetController
@@ -46,10 +41,16 @@ public class TextMasterAccountToolbarController extends DefaultWidgetController
 	// Spring Injection
 	@WireVariable
 	private TextMasterAccountService textMasterAccountService;
+
 	@WireVariable
 	private TextMasterProjectService textMasterProjectService;
+
 	@WireVariable
 	private TypeFacade typeFacade;
+
+	@WireVariable
+	private NotificationService notificationService;
+
 
 	@Override
 	public void initialize(final Component comp)
@@ -128,8 +129,7 @@ public class TextMasterAccountToolbarController extends DefaultWidgetController
 
 		if (!optionalAccount.isPresent())
 		{
-			NotificationUtils
-					.notifyUser(getLabel("accountsnomatchfound", new Object[] { account.getCode() }), NotificationEvent.Type.FAILURE);
+			getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.FAILURE, getLabel("accountsnomatchfound", new Object[] { account.getCode() }));
 			return;
 		}
 
@@ -151,5 +151,10 @@ public class TextMasterAccountToolbarController extends DefaultWidgetController
 			item.setValue(c);
 			this.comboAccounts.appendChild(item);
 		});
+	}
+
+	protected NotificationService getNotificationService()
+	{
+		return notificationService;
 	}
 }
