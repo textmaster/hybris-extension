@@ -554,7 +554,7 @@ public class TextMasterProjectController extends DefaultWidgetController
 		{
 			errors.add(getLabel("errors.attributes.notselected"));
 		}
-		if (CollectionUtils.isEmpty(templateList))
+		if (MapUtils.isEmpty(templatesSelected))
 		{
 			errors.add(getLabel("errors.templates.notselected"));
 		}

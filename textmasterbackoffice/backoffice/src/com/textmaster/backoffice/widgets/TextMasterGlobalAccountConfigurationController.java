@@ -123,11 +123,11 @@ public class TextMasterGlobalAccountConfigurationController extends DefaultWidge
 
 			// Update selected types list box
 			updateSelectedTypes();
-
-			// Display configuration form
-			configurationTabs.setVisible(true);
-			noAccountSelectedLabel.setVisible(false);
 		}
+
+		// Display configuration form
+		configurationTabs.setVisible(true);
+		noAccountSelectedLabel.setVisible(false);
 	}
 
 	/**
