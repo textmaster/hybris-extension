@@ -140,6 +140,18 @@
         <property name="typeCode" value="TextMasterAccount"/>
     </bean>
 
+    <alias name="defaultTextMasterAccountInitDefaultsInterceptor" alias="textMasterAccountInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterAccountInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterAccountInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterAccountCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterAccountInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterAccountInitDefaultsInterceptor"/>
+        <property name="typeCode" value="TextMasterAccount"/>
+    </bean>
+
     <alias name="defaultTextMasterProjectPrepareInterceptor" alias="textMasterProjectPrepareInterceptor"/>
     <bean id="defaultTextMasterProjectPrepareInterceptor"
           class="com.textmaster.core.interceptors.TextMasterProjectPrepareInterceptor">
@@ -152,6 +164,18 @@
         <property name="typeCode" value="TextMasterProject"/>
     </bean>
 
+    <alias name="defaultTextMasterProjectInitDefaultsInterceptor" alias="textMasterProjectInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterProjectInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterProjectInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterProjectCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterProjectInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterProjectInitDefaultsInterceptor"/>
+        <property name="typeCode" value="TextMasterProject"/>
+    </bean>
+
     <alias name="defaultTextMasterDocumentPrepareInterceptor" alias="textMasterDocumentPrepareInterceptor"/>
     <bean id="defaultTextMasterDocumentPrepareInterceptor"
           class="com.textmaster.core.interceptors.TextMasterDocumentPrepareInterceptor">
@@ -161,6 +185,18 @@
     <bean id="textMasterDocumentPrepareInterceptorMapping"
           class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="textMasterDocumentPrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterDocument"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentInitDefaultsInterceptor" alias="textMasterDocumentInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterDocumentInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterDocumentInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterDocumentCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterDocumentInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterDocumentInitDefaultsInterceptor"/>
         <property name="typeCode" value="TextMasterDocument"/>
     </bean>
 
@@ -177,6 +213,19 @@
         <property name="typeCode" value="TextMasterDocumentAttribute"/>
     </bean>
 
+    <alias name="defaultTextMasterDocumentAttributeInitDefaultsInterceptor"
+           alias="textMasterDocumentAttributeInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterDocumentAttributeInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterDocumentAttributeInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterDocumentAttributeCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterDocumentAttributeInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterDocumentAttributeInitDefaultsInterceptor"/>
+        <property name="typeCode" value="TextMasterDocumentAttribute"/>
+    </bean>
+
     <alias name="defaultTextMasterSupportMessagePrepareInterceptor"
            alias="textMasterSupportMessagePrepareInterceptor"/>
     <bean id="defaultTextMasterSupportMessagePrepareInterceptor"
@@ -187,6 +236,19 @@
     <bean id="textMasterSupportMessagePrepareInterceptorMapping"
           class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="textMasterSupportMessagePrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterSupportMessage"/>
+    </bean>
+
+    <alias name="defaultTextMasterSupportMessageInitDefaultsInterceptor"
+           alias="textMasterSupportMessageInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterSupportMessageInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterSupportMessageInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterSupportMessageCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterSupportMessageInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterSupportMessageInitDefaultsInterceptor"/>
         <property name="typeCode" value="TextMasterSupportMessage"/>
     </bean>
 
@@ -201,6 +263,18 @@
         <property name="interceptor" ref="textMasterConfigurationPrepareInterceptor"/>
         <property name="typeCode" value="TextMasterConfiguration"/>
     </bean>
+
+    <alias name="defaultTextMasterConfigurationInitDefaultsInterceptor" alias="textMasterConfigurationInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterConfigurationInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterConfigurationInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterConfigurationCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterConfigurationInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterConfigurationInitDefaultsInterceptor"/>
+        <property name="typeCode" value="TextMasterConfiguration"/>
+    </bean>
     
     <alias name="defaultTextMasterItemTypePrepareInterceptor" alias="textMasterItemTypePrepareInterceptor"/>
     <bean id="defaultTextMasterItemTypePrepareInterceptor"
@@ -211,6 +285,18 @@
     <bean id="textMasterItemTypePrepareInterceptorMapping"
           class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="textMasterItemTypePrepareInterceptor"/>
+        <property name="typeCode" value="TextMasterItemType"/>
+    </bean>
+
+    <alias name="defaultTextMasterItemTypeInitDefaultsInterceptor" alias="textMasterItemTypeInitDefaultsInterceptor"/>
+    <bean id="defaultTextMasterItemTypeInitDefaultsInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterItemTypeInitDefaultsInterceptor">
+        <property name="codeGenerator" ref="textMasterItemTypeCodeGenerator"/>
+    </bean>
+
+    <bean id="textMasterItemTypeInitDefaultsInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterItemTypeInitDefaultsInterceptor"/>
         <property name="typeCode" value="TextMasterItemType"/>
     </bean>
 
