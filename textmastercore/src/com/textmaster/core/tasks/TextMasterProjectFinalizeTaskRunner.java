@@ -51,10 +51,14 @@ public class TextMasterProjectFinalizeTaskRunner implements TaskRunner<TaskModel
 		TextMasterProjectTaskModel task = (TextMasterProjectTaskModel) taskModel;
 		TextMasterProjectModel project = task.getTextMasterProject();
 
+		if (project == null)
+		{
+			// The project could have been removed, so stop the task
+			return;
+		}
+
 		try
 		{
-			TextMasterAccountModel account = project.getAccount();
-
 			Map<String, Object> params = Collections.singletonMap("word_count", Collections.singletonMap("$gt", 0));
 
 			List<TextMasterDocumentDto> remoteDocuments = getTextMasterDocumentService()
@@ -72,6 +76,9 @@ public class TextMasterProjectFinalizeTaskRunner implements TaskRunner<TaskModel
 			{
 				getModelService().saveAll(documentsToSave);
 			}
+
+			// Refresh documents
+			getModelService().refresh(project);
 
 			// If at least one document has not been calculated on TextMaster platform, retry later
 			if (project.getDocuments()
