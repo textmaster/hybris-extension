@@ -16,25 +16,32 @@ import java.util.stream.Collectors;
 public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor
 {
 
-	final static Logger log = LoggerFactory.getLogger(LoggingRequestInterceptor.class);
+	final static Logger LOG = LoggerFactory.getLogger(LoggingRequestInterceptor.class);
 
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException
 	{
-		traceRequest(request, body);
+		if (LOG.isDebugEnabled())
+		{
+			traceRequest(request, body);
+		}
 		ClientHttpResponse response = execution.execute(request, body);
-		traceResponse(response);
+
+		if (LOG.isDebugEnabled())
+		{
+			traceResponse(response);
+		}
 		return response;
 	}
 
 	private void traceRequest(HttpRequest request, byte[] body) throws IOException
 	{
-		log.info("===========================request begin================================================");
-		log.info("URI         : {}", request.getURI());
-		log.info("Method      : {}", request.getMethod());
-		log.info("Headers     : {}", request.getHeaders());
-		log.info("Request body: {}", new String(body, "UTF-8"));
-		log.info("==========================request end================================================");
+		LOG.debug("===========================request begin================================================");
+		LOG.debug("URI         : {}", request.getURI());
+		LOG.debug("Method      : {}", request.getMethod());
+		LOG.debug("Headers     : {}", request.getHeaders());
+		LOG.debug("Request body: {}", new String(body, "UTF-8"));
+		LOG.debug("==========================request end================================================");
 	}
 
 	private void traceResponse(ClientHttpResponse response) throws IOException
@@ -42,12 +49,12 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor
 		BufferedReader buffer = new BufferedReader(new InputStreamReader(response.getBody(), "UTF-8"));
 		String responseBody = buffer.lines().collect(Collectors.joining("\n"));
 
-		log.info("============================response begin==========================================");
-		log.info("Status code  : {}", response.getStatusCode());
-		log.info("Status text  : {}", response.getStatusText());
-		log.info("Headers      : {}", response.getHeaders());
-		log.info("Response body: {}", responseBody);
-		log.info("=======================response end=================================================");
+		LOG.debug("============================response begin==========================================");
+		LOG.debug("Status code  : {}", response.getStatusCode());
+		LOG.debug("Status text  : {}", response.getStatusText());
+		LOG.debug("Headers      : {}", response.getHeaders());
+		LOG.debug("Response body: {}", responseBody);
+		LOG.debug("=======================response end=================================================");
 	}
 
 }

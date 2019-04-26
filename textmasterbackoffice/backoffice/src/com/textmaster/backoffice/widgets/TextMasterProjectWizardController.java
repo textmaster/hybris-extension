@@ -97,7 +97,6 @@ public class TextMasterProjectWizardController extends DefaultWidgetController
 	@ViewEvent(componentID = "btSave", eventName = Events.ON_CLICK)
 	public void onSave(final Event event)
 	{
-		LOG.info("Save");
 		final String projectName = this.txtProjectName.getValue();
 		String templateId = null;
 		if (this.cbxTemplate.getSelectedItem() != null)
@@ -290,7 +289,6 @@ public class TextMasterProjectWizardController extends DefaultWidgetController
 
 	private void refreshTemplateList()
 	{
-		LOG.info("Refresh Template List");
 		// Refresh template list
 		this.cbxTemplate.getItems().clear();
 

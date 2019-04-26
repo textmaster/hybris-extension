@@ -150,7 +150,6 @@ public class TextMasterSummaryController extends DefaultWidgetController
 		}
 
 		// Display notification to user
-		LOG.info("Success Message: {}", getLabel("documentsaddedtoproject", new Object[] { String.valueOf(itemsToAdd.size()) }));
 		getNotificationService().notifyUser(this.getWidgetInstanceManager(), "TextMasterGeneral", NotificationEvent.Level.SUCCESS, getLabel("documentsaddedtoproject", new Object[] { String.valueOf(itemsToAdd.size()) }));
 
 		int numberOfDocumentsNotAdded = itemsSelected.size() - itemsToAdd.size();

@@ -76,15 +76,18 @@ public class TextMasterDocumentActionsRenderer<T> implements WidgetComponentRend
 
 		try
 		{
-			LOG.info("**************************");
-			LOG.info("Impersonation Context Data");
-			LOG.info("Site: {}", site.getUid());
-			LOG.info("Document: {}", document.getCode());
-			LOG.info("Language: {}", document.getProject().getLanguageTarget().getLanguage().getIsocode());
-			LOG.info("CatalogVersion: {}",
-					catalogVersions.stream().map(cv -> "Catalog " + cv.getCatalog().getId() + "." + cv.getVersion()).collect(
-							Collectors.joining(" / ")));
-			LOG.info("**************************");
+			if (LOG.isDebugEnabled())
+			{
+				LOG.debug("**************************");
+				LOG.debug("Impersonation Context Data");
+				LOG.debug("Site: {}", site.getUid());
+				LOG.debug("Document: {}", document.getCode());
+				LOG.debug("Language: {}", document.getProject().getLanguageTarget().getLanguage().getIsocode());
+				LOG.debug("CatalogVersion: {}",
+						catalogVersions.stream().map(cv -> "Catalog " + cv.getCatalog().getId() + "." + cv.getVersion()).collect(
+								Collectors.joining(" / ")));
+				LOG.debug("**************************");
+			}
 
 			final String url = (String) getImpersonationService()
 					.executeInContext(context, getUrl(document, site, contentCatalogVersion, catalogVersions));
@@ -268,16 +271,11 @@ public class TextMasterDocumentActionsRenderer<T> implements WidgetComponentRend
 			@Override
 			public Object execute() throws Throwable
 			{
-				catalogVersions.stream().forEach(
-						cv -> LOG.info("CatalogVersions executor: {}/{}", cv.getCatalog().getId(), cv.getCatalog().getVersion()));
-
 				String url = null;
 				ItemModel item = document.getItem();
 
 				if (item instanceof ProductModel)
 				{
-					LOG.info("Product: {}", ((ProductModel) item).getCode());
-
 					return getTextMasterPreviewService()
 							.getProductPreviewUrl(site, (ProductModel) item, document.getProject().getLanguageTarget().getLanguage(),
 									catalogVersions, contentCatalogVersion);
