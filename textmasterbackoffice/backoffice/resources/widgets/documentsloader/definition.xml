@@ -13,6 +13,8 @@
     <controller class="com.textmaster.backoffice.widgets.TextMasterDocumentsLoaderController"/>
     <sockets>
         <input id="project" type="com.textmaster.core.model.TextMasterProjectModel"/>
+        <input id="reset" type="java.lang.Object"/>
+        <input id="refresh" type="java.lang.Object"/>
         <output id="documents" type="com.textmaster.core.model.TextMasterDocumentModel" multiplicity="List"/>
     </sockets>
 </widget-definition>

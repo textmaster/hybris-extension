@@ -505,6 +505,10 @@
                        targetWidgetId="textmaster-widget-dashboard-projects-loader" inputId="account"/>
     <widget-connection sourceWidgetId="STUB_com.textmaster.backoffice.widgets.actions.validatedocuments" outputId="project"
                        targetWidgetId="textmaster-widget-dashboard-documents-loader" inputId="project"/>
+    <widget-connection sourceWidgetId="STUB_com.textmaster.backoffice.widgets.actions.refreshprojects" outputId="refresh"
+                       targetWidgetId="textmaster-widget-dashboard-projects-loader" inputId="refresh"/>
+    <widget-connection sourceWidgetId="STUB_com.textmaster.backoffice.widgets.actions.refreshdocuments" outputId="refresh"
+                       targetWidgetId="textmaster-widget-dashboard-documents-loader" inputId="refresh"/>
 
 
     <!-- ************* -->

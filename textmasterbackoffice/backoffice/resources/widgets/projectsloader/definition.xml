@@ -13,6 +13,8 @@
     <controller class="com.textmaster.backoffice.widgets.TextMasterProjectsLoaderController"/>
     <sockets>
         <input id="account" type="com.textmaster.core.model.TextMasterAccountModel"/>
+        <input id="reset" type="java.lang.Object"/>
+        <input id="refresh" type="java.lang.Object"/>
         <output id="projects" type="com.textmaster.core.model.TextMasterProjectModel" multiplicity="List"/>
     </sockets>
 </widget-definition>
