@@ -22,43 +22,10 @@
         <property name="name" value="labels"/>
     </bean>
 
-    <alias name="defaultTextMasterPreviewDataModelUrlResolver" alias="textMasterPreviewDataModelUrlResolver"/>
-    <bean id="defaultTextMasterPreviewDataModelUrlResolver"
-          class="com.textmaster.backoffice.resolvers.DefaultTextMasterPreviewDataModelUrlResolver">
-        <property name="productModelUrlResolver" ref="productModelUrlResolver"/>
-        <property name="categoryModelUrlResolver" ref="categoryModelUrlResolver"/>
-        <property name="pageMapping" ref="textMasterPreviewUrlResolverPageMappings"/>
-    </bean>
-
-    <alias name="defaultTextMasterPreviewUrlPageResolver" alias="textMasterPreviewUrlPageResolver"/>
-    <bean id="defaultTextMasterPreviewUrlPageResolver"
-          class="de.hybris.platform.cmscockpit.resolvers.PreviewUrlPageResolver">
-        <property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
-    </bean>
-
-    <!-- Default CMS Preview Loader -->
-    <alias name="defaultTextMasterCmsPreviewLoader" alias="textMasterCmsPreviewLoader"/>
-    <bean id="defaultTextMasterCmsPreviewLoader" class="com.textmaster.backoffice.resolvers.TextMasterDefaultPreviewLoader"/>
-
-    <alias name="defaultTextMasterPreviewService" alias="textMasterPreviewService"/>
-    <bean id="defaultTextMasterPreviewService" class="com.textmaster.backoffice.services.impl.DefaultTextMasterPreviewService">
-        <property name="modelService" ref="modelService"/>
-        <property name="commonI18NService" ref="commonI18NService"/>
-        <property name="cmsPageService" ref="cmsPageService"/>
-        <property name="cmsPreviewService" ref="cmsPreviewService"/>
-        <property name="previewLoader" ref="textMasterCmsPreviewLoader"/>
-        <property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService"/>
-        <property name="textMasterPreviewUrlPageResolver" ref="textMasterPreviewUrlPageResolver"/>
-    </bean>
-
     <!-- Action Renderers -->
     <alias name="defaultTextMasterDocumentActionsRenderer" alias="textMasterDocumentActionsRenderer"/>
     <bean id="defaultTextMasterDocumentActionsRenderer"
-          class="com.textmaster.backoffice.renderer.TextMasterDocumentActionsRenderer" scope="prototype">
-        <property name="textMasterPreviewService" ref="textMasterPreviewService"/>
-        <property name="impersonationService" ref="impersonationService"/>
-        <property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
-    </bean>
+          class="com.textmaster.backoffice.renderer.TextMasterDocumentActionsRenderer" scope="prototype" />
 
     <alias name="defaultTextMasterProjectActionsRenderer" alias="textMasterProjectActionsRenderer"/>
     <bean id="defaultTextMasterProjectActionsRenderer"
