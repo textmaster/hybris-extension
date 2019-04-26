@@ -70,7 +70,7 @@
         <property name="typeService" ref="typeService"/>
         <property name="textMasterRootClasses" ref="textMasterRootClasses"/>
         <property name="textMasterDocumentDao" ref="textMasterDocumentDao"/>
-        <property name="textMasterApiService" ref="textMasterApiService" />
+        <property name="textMasterApiService" ref="textMasterApiService"/>
     </bean>
 
     <alias name="defaultTextMasterProjectService" alias="textMasterProjectService"/>
@@ -85,7 +85,7 @@
         <property name="textMasterDocumentService" ref="textMasterDocumentService"/>
         <property name="configurationService" ref="configurationService"/>
         <property name="taskService" ref="taskService"/>
-        <property name="textMasterProjectStatusReverseStrategy" ref="textMasterProjectStatusReverseStrategy" />
+        <property name="textMasterProjectStatusReverseStrategy" ref="textMasterProjectStatusReverseStrategy"/>
     </bean>
 
     <alias name="defaultTextMasterLanguageService" alias="textMasterLanguageService"/>
@@ -100,9 +100,10 @@
           parent="defaultCommerceCommonI18NService" scope="tenant">
         <property name="textMasterLanguageService" ref="textMasterLanguageService"/>
     </bean>
-    
+
     <alias name="defaultTextMasterConfigurationService" alias="textMasterConfigurationService"/>
-    <bean id="defaultTextMasterConfigurationService" class="com.textmaster.core.services.impl.DefaultTextMasterConfigurationService"
+    <bean id="defaultTextMasterConfigurationService"
+          class="com.textmaster.core.services.impl.DefaultTextMasterConfigurationService"
           scope="tenant">
         <property name="modelService" ref="modelService"/>
         <property name="commonI18NService" ref="commonI18NService"/>
@@ -252,7 +253,7 @@
         <property name="typeCode" value="TextMasterSupportMessage"/>
     </bean>
 
-	<alias name="defaultTextMasterConfigurationPrepareInterceptor" alias="textMasterConfigurationPrepareInterceptor"/>
+    <alias name="defaultTextMasterConfigurationPrepareInterceptor" alias="textMasterConfigurationPrepareInterceptor"/>
     <bean id="defaultTextMasterConfigurationPrepareInterceptor"
           class="com.textmaster.core.interceptors.TextMasterConfigurationPrepareInterceptor">
         <property name="codeGenerator" ref="textMasterConfigurationCodeGenerator"/>
@@ -275,13 +276,13 @@
         <property name="interceptor" ref="textMasterConfigurationInitDefaultsInterceptor"/>
         <property name="typeCode" value="TextMasterConfiguration"/>
     </bean>
-    
+
     <alias name="defaultTextMasterItemTypePrepareInterceptor" alias="textMasterItemTypePrepareInterceptor"/>
     <bean id="defaultTextMasterItemTypePrepareInterceptor"
           class="com.textmaster.core.interceptors.TextMasterItemTypePrepareInterceptor">
         <property name="codeGenerator" ref="textMasterItemTypeCodeGenerator"/>
     </bean>
-    
+
     <bean id="textMasterItemTypePrepareInterceptorMapping"
           class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="textMasterItemTypePrepareInterceptor"/>
@@ -298,6 +299,26 @@
           class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
         <property name="interceptor" ref="textMasterItemTypeInitDefaultsInterceptor"/>
         <property name="typeCode" value="TextMasterItemType"/>
+    </bean>
+
+    <alias name="defaultTextMasterProjectRemoveInterceptor" alias="textMasterProjectRemoveInterceptor"/>
+    <bean id="defaultTextMasterProjectRemoveInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterProjectRemoveInterceptor"/>
+
+    <bean id="textMasterProjectRemoveInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterProjectRemoveInterceptor"/>
+        <property name="typeCode" value="TextMasterProject"/>
+    </bean>
+
+    <alias name="defaultTextMasterDocumentRemoveInterceptor" alias="textMasterDocumentRemoveInterceptor"/>
+    <bean id="defaultTextMasterDocumentRemoveInterceptor"
+          class="com.textmaster.core.interceptors.TextMasterDocumentRemoveInterceptor"/>
+
+    <bean id="textMasterDocumentRemoveInterceptorMapping"
+          class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="textMasterDocumentRemoveInterceptor"/>
+        <property name="typeCode" value="TextMasterDocument"/>
     </bean>
 
     <!-- Code generators -->
@@ -355,7 +376,7 @@
         <property name="start" value="${keygen.textmasterconfiguration.code.start}"/>
         <property name="template" value="${keygen.textmasterconfiguration.code.template}"/>
     </bean>
-    
+
     <alias name="defaultTextMasterItemTypeCodeGenerator" alias="textMasterItemTypeCodeGenerator"/>
     <bean id="defaultTextMasterItemTypeCodeGenerator"
           class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator">
@@ -364,7 +385,7 @@
         <property name="start" value="${keygen.textmasteritemtype.code.start}"/>
         <property name="template" value="${keygen.textmasteritemtype.code.template}"/>
     </bean>
-    
+
     <!-- Populators -->
 
     <alias name="defaultTextMasterProjectPopulator" alias="textMasterProjectPopulator"/>
@@ -517,9 +538,9 @@
           class="com.textmaster.core.tasks.TextMasterProjectFinalizeTaskRunner">
         <property name="configurationService" ref="configurationService"/>
         <property name="textMasterProjectService" ref="textMasterProjectService"/>
-        <property name="modelService" ref="modelService" />
-        <property name="taskService" ref="taskService" />
-        <property name="textMasterDocumentService" ref="textMasterDocumentService" />
+        <property name="modelService" ref="modelService"/>
+        <property name="taskService" ref="taskService"/>
+        <property name="textMasterDocumentService" ref="textMasterDocumentService"/>
     </bean>
 
     <alias name="defaultTextMasterProjectAutolaunchTaskRunner" alias="textMasterProjectAutolaunchTaskRunner"/>
@@ -527,8 +548,8 @@
           class="com.textmaster.core.tasks.TextMasterProjectAutolaunchTaskRunner">
         <property name="configurationService" ref="configurationService"/>
         <property name="textMasterProjectService" ref="textMasterProjectService"/>
-        <property name="modelService" ref="modelService" />
-        <property name="taskService" ref="taskService" />
-        <property name="textMasterProjectStatusReverseStrategy" ref="textMasterProjectStatusReverseStrategy" />
+        <property name="modelService" ref="modelService"/>
+        <property name="taskService" ref="taskService"/>
+        <property name="textMasterProjectStatusReverseStrategy" ref="textMasterProjectStatusReverseStrategy"/>
     </bean>
 </beans>

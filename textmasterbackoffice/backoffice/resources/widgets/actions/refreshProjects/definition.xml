@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<action-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   id="com.textmaster.backoffice.widgets.actions.refreshprojects"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+    <name>TextMaster Refresh Projects</name>
+    <description>Refresh Projects</description>
+    <author>CleverAge</author>
+    <version>1.0</version>
+    <actionClassName>com.textmaster.backoffice.widgets.actions.refresh.RefreshAction</actionClassName>
+    
+	<sockets>
+		<output id="refresh" type="java.lang.Object" />
+	</sockets>
+	
+	<inputType>java.lang.Object</inputType>
+	<outputType>java.lang.Object</outputType>
+
+    <iconUri>icons/icon_reload.png</iconUri>
+    <iconHoverUri>icons/icon_reload.png</iconHoverUri>
+	<iconDisabledUri>icons/icon_reload.png</iconDisabledUri>
+</action-definition>

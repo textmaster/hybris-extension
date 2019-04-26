@@ -14,6 +14,8 @@
              xmlns:y="http://www.hybris.com/cockpit/config/hybris">
         <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
             <y:group qualifier="common">
+                <y:action action-id="com.hybris.cockpitng.action.delete" property="selectedObjects"/>
+                <y:action action-id="com.textmaster.backoffice.widgets.actions.refreshprojects"/>
             </y:group>
         </y:actions>
     </context>
@@ -23,6 +25,8 @@
         <y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
             <y:group qualifier="common">
                 <y:action action-id="com.textmaster.backoffice.widgets.actions.validatedocuments" property="selectedObjects"/>
+                <y:action action-id="com.hybris.cockpitng.action.delete" property="selectedObjects"/>
+                <y:action action-id="com.textmaster.backoffice.widgets.actions.refreshdocuments"/>
             </y:group>
         </y:actions>
 
