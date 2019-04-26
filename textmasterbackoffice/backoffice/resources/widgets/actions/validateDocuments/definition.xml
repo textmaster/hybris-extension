@@ -6,7 +6,7 @@
     <description>Validate Documents</description>
     <author>CleverAge</author>
     <version>1.0</version>
-    <actionClassName>com.textmaster.backoffice.widgets.actions.create.ValidateDocumentsAction</actionClassName>
+    <actionClassName>com.textmaster.backoffice.widgets.actions.validate.ValidateDocumentsAction</actionClassName>
     
 	<sockets>
 		<output id="project" type="com.textmaster.core.model.TextMasterProjectModel" />

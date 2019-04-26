@@ -1,4 +1,4 @@
-package com.textmaster.backoffice.widgets.actions.create;
+package com.textmaster.backoffice.widgets.actions.validate;
 
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
