@@ -32,7 +32,7 @@ public class TextMasterProjectFinalizePerformable extends AbstractJobPerformable
 	public PerformResult perform(CronJobModel cronJobModel)
 	{
 		// Get projects not finalized
-		List<TextMasterProjectModel> projects = getProjectNotFinalizedWithTranslationMemory();
+		List<TextMasterProjectModel> projects = getProjectNotFinalized();
 
 		for (TextMasterProjectModel project : projects)
 		{
@@ -50,15 +50,16 @@ public class TextMasterProjectFinalizePerformable extends AbstractJobPerformable
 	 *
 	 * @return
 	 */
-	protected List<TextMasterProjectModel> getProjectNotFinalizedWithTranslationMemory()
+	protected List<TextMasterProjectModel> getProjectNotFinalized()
 	{
 		List<TextMasterProjectStatusEnum> projectStatuses = getTextMasterProjectService().getProjectAvailableStatuses();
 
 		// Take in account all projects open
 		List<TextMasterProjectModel> projects = getTextMasterProjectService().getProjects(projectStatuses);
 
+		// If not finalized OR (finalized AND translation memory not done)
 		return projects.stream()
-				.filter(p -> !p.getFinalized() && p.getTranslationMemoryActivated())
+				.filter(p -> !p.getFinalized() || (p.getFinalized() && p.getTranslationMemoryActivated() && !p.getTranslationMemoryFinished()))
 				.collect(Collectors.toList());
 	}
 
