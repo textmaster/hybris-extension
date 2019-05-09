@@ -191,6 +191,12 @@
                     <defaultvalue>Boolean.FALSE</defaultvalue>
                     <persistence type="property"/>
                 </attribute>
+                <attribute qualifier="translationMemoryFinished" type="java.lang.Boolean">
+                    <description>Define if the translation memory process is finised on textmaster side</description>
+                    <modifiers optional="false"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
             </attributes>
         </itemtype>
 

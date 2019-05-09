@@ -383,7 +383,13 @@ public class DefaultTextMasterProjectService implements TextMasterProjectService
 				project.setCurrencyIsocode(totalCostDtoOptional.get().getCurrency());
 			}
 		}
+
+		// Prepare translation memory option value
+		Boolean translationMemoryFinished =
+				remoteProject.getOptions().getTranslationMemory() != null ? remoteProject.getOptions().getTranslationMemory() : Boolean.FALSE;
+
 		project.setFinalized(remoteProject.getFinalized());
+		project.setTranslationMemoryFinished(translationMemoryFinished);
 		getModelService().save(project);
 	}
 
