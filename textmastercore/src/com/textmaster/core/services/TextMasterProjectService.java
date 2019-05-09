@@ -23,13 +23,13 @@ public interface TextMasterProjectService
 	 * Create a projet on the hybris platform and push it on TextMaster platform
 	 *
 	 * @param name
-	 * @param templateId
+	 * @param template
 	 * @param account
 	 * @param type
 	 * @param attributes
 	 * @return
 	 */
-	public TextMasterProjectModel createAndPushProject(String name, String templateId, TextMasterLanguageModel sourceLanguage,
+	public TextMasterProjectModel createAndPushProject(String name, TextMasterApiTemplateDto template, TextMasterLanguageModel sourceLanguage,
 			TextMasterLanguageModel targetLanguage, TextMasterAccountModel account, ComposedTypeModel type,
 			List<AttributeDescriptorModel> attributes, List<ItemModel> items);
 
@@ -37,13 +37,13 @@ public interface TextMasterProjectService
 	 * Create a projet on the hybris platform
 	 *
 	 * @param name
-	 * @param templateId
+	 * @param template
 	 * @param account
 	 * @param type
 	 * @param attributes
 	 * @return
 	 */
-	public TextMasterProjectModel createProject(String name, String templateId, TextMasterLanguageModel sourceLanguage,
+	public TextMasterProjectModel createProject(String name, TextMasterApiTemplateDto template, TextMasterLanguageModel sourceLanguage,
 			TextMasterLanguageModel targetLanguage, TextMasterAccountModel account, ComposedTypeModel type,
 			List<AttributeDescriptorModel> attributes, List<ItemModel> items);
 
@@ -114,4 +114,18 @@ public interface TextMasterProjectService
 	 * @return
 	 */
 	public TextMasterProjectResponseDto getProject(TextMasterProjectModel project);
+
+	/**
+	 * Update hybris project from remote project data.
+	 *
+	 * @param project
+	 */
+	public void updateProject(TextMasterProjectModel project);
+
+	/**
+	 * Update hybris documents from remote project.
+	 *
+	 * @param project
+	 */
+	public void updateDocuments(TextMasterProjectModel project);
 }

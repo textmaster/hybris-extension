@@ -185,6 +185,12 @@
                     <defaultvalue>Boolean.FALSE</defaultvalue>
                     <persistence type="property"/>
                 </attribute>
+                <attribute qualifier="translationMemoryActivated" type="java.lang.Boolean">
+                    <description>Define if the translation memory option is activated on template</description>
+                    <modifiers optional="false"/>
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                    <persistence type="property"/>
+                </attribute>
             </attributes>
         </itemtype>
 

@@ -79,12 +79,12 @@ public class DefaultTextMasterProjectService implements TextMasterProjectService
 	 */
 	@Override
 	@Transactional
-	public TextMasterProjectModel createAndPushProject(final String name, final String templateId,
+	public TextMasterProjectModel createAndPushProject(final String name, final TextMasterApiTemplateDto template,
 			final TextMasterLanguageModel sourceLanguage, final TextMasterLanguageModel targetLanguage,
 			final TextMasterAccountModel account, final ComposedTypeModel type, final List<AttributeDescriptorModel> attributes,
 			final List<ItemModel> items)
 	{
-		final TextMasterProjectModel project = this.createProject(name, templateId, sourceLanguage, targetLanguage, account,
+		final TextMasterProjectModel project = this.createProject(name, template, sourceLanguage, targetLanguage, account,
 				type, attributes, items);
 		this.pushProject(project);
 		return project;
@@ -190,11 +190,14 @@ public class DefaultTextMasterProjectService implements TextMasterProjectService
 	 */
 	@Override
 	@Transactional
-	public TextMasterProjectModel createProject(final String name, final String templateId,
+	public TextMasterProjectModel createProject(final String name, final TextMasterApiTemplateDto template,
 			final TextMasterLanguageModel sourceLanguage, final TextMasterLanguageModel targetLanguage,
 			final TextMasterAccountModel account, final ComposedTypeModel type, final List<AttributeDescriptorModel> attributes,
 			final List<ItemModel> items)
 	{
+		// Prepare translation memory option value
+		Boolean translationMemoryActivated =
+				template.getOptions().getTranslationMemory() != null ? template.getOptions().getTranslationMemory() : Boolean.FALSE;
 
 		// Create on hybris
 		final TextMasterProjectModel project = modelService.create(TextMasterProjectModel.class);
@@ -202,7 +205,8 @@ public class DefaultTextMasterProjectService implements TextMasterProjectService
 		project.setAccount(account);
 		project.setTranslatedItemType(type);
 		project.setAttributes(attributes);
-		project.setTemplateId(templateId);
+		project.setTemplateId(template.getId());
+		project.setTranslationMemoryActivated(translationMemoryActivated);
 		project.setStatus(TextMasterProjectStatusEnum.IN_CREATION);
 
 		project.setLanguageSource(sourceLanguage);
@@ -267,7 +271,7 @@ public class DefaultTextMasterProjectService implements TextMasterProjectService
 	@Override
 	public void finalize(TextMasterProjectModel project)
 	{
-		getTextMasterApiService()
+		TextMasterProjectResponseDto response = getTextMasterApiService()
 				.finalize(project.getAccount().getApiKey(), project.getAccount().getApiSecret(), project.getRemoteId());
 	}
 
@@ -360,6 +364,79 @@ public class DefaultTextMasterProjectService implements TextMasterProjectService
 	{
 		return getTextMasterApiService()
 				.getProject(project.getAccount().getApiKey(), project.getAccount().getApiSecret(), project.getRemoteId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void updateProject(TextMasterProjectModel project)
+	{
+		TextMasterProjectResponseDto remoteProject = this.getProject(project);
+		project.setTotalWordCount(remoteProject.getTotalWordCount());
+		if (CollectionUtils.isNotEmpty(remoteProject.getTotalCosts()))
+		{
+			Optional<TextMasterTotalCostDto> totalCostDtoOptional = remoteProject.getTotalCosts().stream().findFirst();
+			if (totalCostDtoOptional.isPresent())
+			{
+				project.setPrice(BigDecimal.valueOf(totalCostDtoOptional.get().getAmount()));
+				project.setCurrencyIsocode(totalCostDtoOptional.get().getCurrency());
+			}
+		}
+		project.setFinalized(remoteProject.getFinalized());
+		getModelService().save(project);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void updateDocuments(TextMasterProjectModel project)
+	{
+		Map<String, Object> params = Collections.singletonMap("word_count", Collections.singletonMap("$gt", 0));
+
+		List<TextMasterDocumentDto> remoteDocuments = getTextMasterDocumentService()
+				.filterDocuments(project, params);
+
+		// Update documents without word count
+		Collection<TextMasterDocumentModel> documentsToSave = project.getDocuments()
+				.stream()
+				.filter(d -> d.getWordCount() == 0)
+				.map(d -> searchAndSetWordCount(remoteDocuments, d))
+				.filter(d -> d != null)
+				.collect(Collectors.toList());
+
+		if (CollectionUtils.isNotEmpty(documentsToSave))
+		{
+			getModelService().saveAll(documentsToSave);
+		}
+
+		// Refresh documents
+		getModelService().refresh(project);
+	}
+
+	/**
+	 * Search, define word count and return document.
+	 *
+	 * @param remoteDocuments
+	 * @param projectDocument
+	 * @return
+	 */
+	protected TextMasterDocumentModel searchAndSetWordCount(List<TextMasterDocumentDto> remoteDocuments,
+			TextMasterDocumentModel projectDocument)
+	{
+		Optional<TextMasterDocumentDto> remoteDocument = remoteDocuments
+				.stream()
+				.filter(rd -> rd.getId().equalsIgnoreCase(projectDocument.getRemoteId()))
+				.findFirst();
+
+		if (!remoteDocument.isPresent())
+		{
+			return null;
+		}
+
+		projectDocument.setWordCount(remoteDocument.get().getWordCount());
+		return projectDocument;
 	}
 
 	protected ModelService getModelService()
