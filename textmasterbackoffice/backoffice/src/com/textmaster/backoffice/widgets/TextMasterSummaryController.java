@@ -220,7 +220,7 @@ public class TextMasterSummaryController extends DefaultWidgetController
 
 				// Create project on Hybris and TextMaster platform
 				TextMasterProjectModel project = textMasterProjectService
-						.createAndPushProject(name, template.getId(), sourceLanguage, targetLanguage, account, type, attributes, items);
+						.createAndPushProject(name, template, sourceLanguage, targetLanguage, account, type, attributes, items);
 
 				// Schedule the task to send all documents and finalize project
 				final TextMasterProjectTaskModel task = getModelService().create(TextMasterProjectTaskModel.class);

@@ -6,3 +6,4 @@ INSERT_UPDATE CronJob; code[unique = true]                 ; job(code)          
                      ; textMasterGetTranslationCronjob     ; defaultTextMasterGetTranslationsPerformable    ;                 ;
                      ; textMasterDocumentRecoveryCronjob   ; defaultTextMasterDocumentRecoveryPerformable   ;                 ;
                      ; textMasterGetSupportMessagesCronjob ; defaultTextMasterGetSupportMessagesPerformable ;                 ;
+                     ; textMasterProjectFinalizeCronjob    ; defaultTextMasterProjectFinalizePerformable    ;                 ;

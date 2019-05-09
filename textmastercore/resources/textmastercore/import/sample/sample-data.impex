@@ -13,10 +13,11 @@ INSERT_UPDATE TextMasterLanguage; isocode[unique = true]; active[default = true]
 
 
 # Import trigger for cronjobs
-INSERT_UPDATE Trigger; cronJob(code)[unique = true]        ; cronExpression  ; active; relative
+INSERT_UPDATE Trigger; cronJob(code)[unique = true]        ; cronExpression    ; active; relative
                      ; textMasterGetTranslationCronjob     ; 0 0/5 * 1/1 * ? * ; true  ; false
                      ; textMasterDocumentRecoveryCronjob   ; 0 0/5 * 1/1 * ? * ; true  ; false
                      ; textMasterGetSupportMessagesCronjob ; 0 0/5 * 1/1 * ? * ; true  ; false
+                     ; textMasterProjectFinalizeCronjob    ; 0 0/5 * 1/1 * ? * ; true  ; false
 
 # Import some categories
 INSERT_UPDATE Category; code[unique = true]; catalogVersion(catalog(id), version); name[lang = $lang]; supercategories(code)

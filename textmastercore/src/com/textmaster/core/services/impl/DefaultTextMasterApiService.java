@@ -10,7 +10,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -20,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
@@ -28,7 +31,7 @@ import java.util.*;
 
 public class DefaultTextMasterApiService implements TextMasterApiService
 {
-	private static final Logger LOG = Logger.getLogger(DefaultTextMasterApiService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultTextMasterApiService.class);
 	private ConfigurationService configurationService;
 
 	/**
@@ -310,8 +313,23 @@ public class DefaultTextMasterApiService implements TextMasterApiService
 		params.put("project", projectId);
 
 		// Send request
-		final ResponseEntity<TextMasterProjectResponseDto> responseEntity = template.exchange(url, HttpMethod.PUT, requestEntity,
-				TextMasterProjectResponseDto.class, params);
+		ResponseEntity<TextMasterProjectResponseDto> responseEntity = null;
+
+		try
+		{
+			if (LOG.isDebugEnabled())
+			{
+				LOG.debug("Parameters sent to finalize project: {}", params.toString());
+			}
+
+			responseEntity = template.exchange(url, HttpMethod.PUT, requestEntity, TextMasterProjectResponseDto.class, params);
+		}
+		catch (RestClientException rce)
+		{
+			LOG.error("Impossible to access to remote platform to finalize project with params [{}]: {}", params.toString(),
+					rce.getMessage());
+			throw rce;
+		}
 
 		return responseEntity.getBody();
 	}
@@ -337,8 +355,23 @@ public class DefaultTextMasterApiService implements TextMasterApiService
 		params.put("project", projectId);
 
 		// Send request
-		final ResponseEntity<TextMasterProjectResponseDto> responseEntity = template.exchange(url, HttpMethod.PUT, requestEntity,
-				TextMasterProjectResponseDto.class, params);
+		ResponseEntity<TextMasterProjectResponseDto> responseEntity = null;
+
+		try
+		{
+			if (LOG.isDebugEnabled())
+			{
+				LOG.debug("Parameters sent to launch project: {}", params.toString());
+			}
+
+			responseEntity = template.exchange(url, HttpMethod.PUT, requestEntity, TextMasterProjectResponseDto.class, params);
+		}
+		catch (RestClientException rce)
+		{
+			LOG.error("Impossible to access to remote platform to launch project with params [{}]: {}", params.toString(),
+					rce.getMessage());
+			throw rce;
+		}
 
 		return responseEntity.getBody();
 	}
@@ -450,13 +483,15 @@ public class DefaultTextMasterApiService implements TextMasterApiService
 		params.put("project", projectId);
 
 		// Send request
-		final ResponseEntity<TextMasterDocumentsCompleteResponseDto> responseEntity = template.exchange(url, HttpMethod.POST, requestEntity,
-				new ParameterizedTypeReference<TextMasterDocumentsCompleteResponseDto>()
-				{
-					// Empty Body
-				}, params);
+		final ResponseEntity<TextMasterDocumentsCompleteResponseDto> responseEntity = template
+				.exchange(url, HttpMethod.POST, requestEntity,
+						new ParameterizedTypeReference<TextMasterDocumentsCompleteResponseDto>()
+						{
+							// Empty Body
+						}, params);
 
-		if (TextmastercoreConstants.Services.Constants.COMPLETE_RETURN_OK.equals(responseEntity.getBody().getStatus())) {
+		if (TextmastercoreConstants.Services.Constants.COMPLETE_RETURN_OK.equals(responseEntity.getBody().getStatus()))
+		{
 			return true;
 		}
 
