@@ -7,7 +7,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "expertise",
-        "language_level"
+        "language_level",
+        "translation_memory"
 })
 public class TextMasterOptionsDto {
 
@@ -16,6 +17,9 @@ public class TextMasterOptionsDto {
 
     @JsonProperty("language_level")
     private String languageLevel;
+
+    @JsonProperty("translation_memory")
+    private Boolean translationMemory;
 
     public String getLanguageLevel() {
         return languageLevel;
@@ -31,5 +35,15 @@ public class TextMasterOptionsDto {
 
     public void setExpertise(Boolean expertise) {
         this.expertise = expertise;
+    }
+
+    public Boolean getTranslationMemory()
+    {
+        return translationMemory;
+    }
+
+    public void setTranslationMemory(Boolean translationMemory)
+    {
+        this.translationMemory = translationMemory;
     }
 }
