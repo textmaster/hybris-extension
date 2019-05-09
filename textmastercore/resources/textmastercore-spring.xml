@@ -517,6 +517,12 @@
         <property name="textMasterSupportMessageReverseConverter" ref="textMasterSupportMessageReverseConverter"/>
     </bean>
 
+    <bean id="defaultTextMasterProjectFinalizePerformable"
+          class="com.textmaster.core.cronjobs.TextMasterProjectFinalizePerformable"
+          parent="abstractJobPerformable">
+        <property name="textMasterProjectService" ref="textMasterProjectService"/>
+    </bean>
+
     <!-- System Setup -->
 
     <bean id="defaultTextMasterCoreSystemSetup" class="com.textmaster.core.setup.DefaultTextMasterCoreSystemSetup"

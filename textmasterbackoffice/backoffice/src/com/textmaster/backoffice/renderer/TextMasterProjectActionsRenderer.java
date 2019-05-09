@@ -36,35 +36,79 @@ public class TextMasterProjectActionsRenderer<T> implements WidgetComponentRende
 		// Get project
 		TextMasterProjectModel project = (TextMasterProjectModel) data;
 
-		// Check if the project must be started or not
-		if (!TextMasterProjectStatusEnum.IN_CREATION.equals(project.getStatus()))
-		{
-			return;
-		}
-
 		Vlayout container = new Vlayout();
 
-		if (!project.getAutolaunch())
-		{
-			Button startButton = new Button();
+		// Add refresh button
+		Button refreshButton = new Button();
 
-			// Display button only if the projet has been finalized
-			if (BooleanUtils.isTrue(project.getFinalized()))
+		refreshButton.setLabel(Labels.getLabel("project.list.actions.refreshbutton"));
+		refreshButton.addEventListener(Events.ON_CLICK, new EventListener<Event>()
+		{
+			@Override
+			public void onEvent(Event event) throws Exception
 			{
-				startButton.setLabel(Labels.getLabel("project.list.actions.startbutton"));
-				startButton.addEventListener(Events.ON_CLICK, new EventListener<Event>()
+				// Update documents
+				getTextMasterProjectService().updateDocuments(project);
+
+				// Start project
+				getTextMasterProjectService().updateProject(project);
+
+				// Refresh project list
+				widgetInstanceManager.sendOutput("account", project.getAccount());
+			}
+		});
+		container.appendChild(refreshButton);
+
+		// Check if the project must be started or not
+		if (TextMasterProjectStatusEnum.IN_CREATION.equals(project.getStatus()))
+		{
+			if (!project.getAutolaunch())
+			{
+				// Add start button
+				Button startButton = new Button();
+
+				// Display button only if the projet has been finalized
+				if (BooleanUtils.isTrue(project.getFinalized()))
+				{
+					startButton.setLabel(Labels.getLabel("project.list.actions.startbutton"));
+					startButton.addEventListener(Events.ON_CLICK, new EventListener<Event>()
+					{
+						@Override
+						public void onEvent(Event event) throws Exception
+						{
+							// Start project
+							getTextMasterProjectService().launch(project);
+
+							// Refresh project list
+							widgetInstanceManager.sendOutput("account", project.getAccount());
+						}
+					});
+					container.appendChild(startButton);
+				}
+			}
+
+			// Add start button
+			Button finalizeButton = new Button();
+
+			// If at least one document has not been calculated on TextMaster platform, retry later
+			if (!project.getFinalized() && project.getDocuments()
+					.stream()
+					.allMatch(d -> d.getWordCount() > 0))
+			{
+				finalizeButton.setLabel(Labels.getLabel("project.list.actions.finalizebutton"));
+				finalizeButton.addEventListener(Events.ON_CLICK, new EventListener<Event>()
 				{
 					@Override
 					public void onEvent(Event event) throws Exception
 					{
 						// Start project
-						getTextMasterProjectService().launch(project);
+						getTextMasterProjectService().finalize(project);
 
 						// Refresh project list
 						widgetInstanceManager.sendOutput("account", project.getAccount());
 					}
 				});
-				container.appendChild(startButton);
+				container.appendChild(finalizeButton);
 			}
 		}
 

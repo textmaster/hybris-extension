@@ -59,26 +59,8 @@ public class TextMasterProjectFinalizeTaskRunner implements TaskRunner<TaskModel
 
 		try
 		{
-			Map<String, Object> params = Collections.singletonMap("word_count", Collections.singletonMap("$gt", 0));
-
-			List<TextMasterDocumentDto> remoteDocuments = getTextMasterDocumentService()
-					.filterDocuments(project, params);
-
-			// Update documents without word count
-			Collection<TextMasterDocumentModel> documentsToSave = project.getDocuments()
-					.stream()
-					.filter(d -> d.getWordCount() == 0)
-					.map(d -> searchAndSetWordCount(remoteDocuments, d))
-					.filter(d -> d != null)
-					.collect(Collectors.toList());
-
-			if (CollectionUtils.isNotEmpty(documentsToSave))
-			{
-				getModelService().saveAll(documentsToSave);
-			}
-
-			// Refresh documents
-			getModelService().refresh(project);
+			// Update documents
+			getTextMasterProjectService().updateDocuments(project);
 
 			// If at least one document has not been calculated on TextMaster platform, retry later
 			if (project.getDocuments()
@@ -90,18 +72,10 @@ public class TextMasterProjectFinalizeTaskRunner implements TaskRunner<TaskModel
 			}
 
 			// Update project
-			TextMasterProjectResponseDto remoteProject = getTextMasterProjectService().getProject(project);
-			project.setTotalWordCount(remoteProject.getTotalWordCount());
-			project.setPrice(BigDecimal.valueOf(remoteProject.getTotalCosts().stream().findFirst().get().getAmount()));
-			project.setCurrencyIsocode(remoteProject.getTotalCosts().stream().findFirst().get().getCurrency());
-			getModelService().save(project);
+			getTextMasterProjectService().updateProject(project);
 
 			// Finalize project
 			getTextMasterProjectService().finalize(project);
-
-			// Add flag to project to indicates that the finalize process has been executed
-			project.setFinalized(true);
-			getModelService().save(project);
 
 			// If the project is configured with autolaunch, start a new task to update project status
 			// Schedule the task to manage status for autolaunch project
@@ -112,7 +86,7 @@ public class TextMasterProjectFinalizeTaskRunner implements TaskRunner<TaskModel
 		}
 		catch (Exception e)
 		{
-			LOG.error("An error occured during finalizing project: {}", e.getMessage(), e);
+			LOG.error("An error occured during finalizing project: {}, retry later", e.getMessage(), e);
 			throw retry(task);
 		}
 	}
@@ -150,30 +124,6 @@ public class TextMasterProjectFinalizeTaskRunner implements TaskRunner<TaskModel
 		retryLaterException.setRollBack(false);
 		retryLaterException.setDelay(interval * 60 * 1000);
 		return retryLaterException;
-	}
-
-	/**
-	 * Search, define word count and return document.
-	 *
-	 * @param remoteDocuments
-	 * @param projectDocument
-	 * @return
-	 */
-	protected TextMasterDocumentModel searchAndSetWordCount(List<TextMasterDocumentDto> remoteDocuments,
-			TextMasterDocumentModel projectDocument)
-	{
-		Optional<TextMasterDocumentDto> remoteDocument = remoteDocuments
-				.stream()
-				.filter(rd -> rd.getId().equalsIgnoreCase(projectDocument.getRemoteId()))
-				.findFirst();
-
-		if (!remoteDocument.isPresent())
-		{
-			return null;
-		}
-
-		projectDocument.setWordCount(remoteDocument.get().getWordCount());
-		return projectDocument;
 	}
 
 	@Override
